@@ -45,7 +45,7 @@
     margin: 0;
 }
 
-.routs a, .signIn, .signUp{
+.routs a, .signIn, .signUp, .user{
     /* Purple Blue */
     text-decoration: none;
     border-radius: 4px;
@@ -60,9 +60,18 @@
     background-color: #FFFFFF;
     cursor: pointer;
 }
+
+
 .notActive{
     /* Grey / 400 */
     color: #7C8DB0;
+}
+
+.user{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
 }
 
 .routs a:hover, .signIn:hover{
@@ -81,10 +90,6 @@
 .signIn{
     color: #7C8DB0;
 }
-
-/*.signUp:hover{*/
-
-/*}*/
 
 .signUp::before {
     content: "";

@@ -1,6 +1,17 @@
+import Hero from "@/app/components/hero/hero";
+import Deals from "@/app/components/deals/deals";
+import Link from "next/link";
+
 export default function Home() {
   return (
-    <div style={{ width: '100%', height: '80vh' }}>
-    </div>
+      <div>
+          <Hero/>
+          <Deals length={4} color={"#605DEC"} type={'packages'}/>
+          <Deals length={3} color={"#3bcab0"} type={'hotels'}/>
+          <Link className={"Link"} href={'/hotels'}>
+            <button className={"button"}>Explore more stays</button>
+          </Link>
+          {/*<Feedback/>*/}
+      </div>
   );
 }

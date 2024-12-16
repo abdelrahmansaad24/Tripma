@@ -1,0 +1,44 @@
+.main{
+    margin-top: 96px;
+}
+
+.Link{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2.5rem;
+    text-decoration: none;
+}
+
+.button {
+    /* button */
+
+    /* Auto layout */
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 20px;
+    gap: 8px;
+
+    width: 195px;
+    height: 48px;
+
+    /* Purple Blue */
+    background: #605DEC;
+    border-radius: 4px;
+
+    color: #FAFAFA;
+    border-width: 1px;
+    border-color: #605DEC;
+    transition-property: all;
+    transition-duration: 200ms;
+
+}
+
+.button:hover {
+    color: #605DEC;
+    background-color: white;
+    border-width: 2px;
+    border-color: #605DEC;
+}

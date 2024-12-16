@@ -1,0 +1,85 @@
+.card {
+    width: 411px;           /* w-[410.67px] */
+    height: fit-content;
+    display: flex;             /* flex */
+    flex-direction: column;    /* flex-col */
+    justify-content: flex-start; /* justify-start */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* replaced dealsShadow with a standard shadow */
+    border-bottom-left-radius: 0.25rem; /* rounded-b translates to border-bottom-left-radius: 0.25rem */
+    border-bottom-right-radius: 0.25rem; /* rounded-b translates to border-bottom-right-radius: 0.25rem */
+    padding-bottom: 20px;
+}
+
+.card .image {
+    width: 100%;               /* w-full */
+    height: 100%;              /* h-full */
+    object-fit: cover;         /* object-cover */
+    border-top-left-radius: 0.25rem; /* rounded-t translates to border-top-left-radius: 0.25rem */
+    border-top-right-radius: 0.25rem; /* rounded-t translates to border-top-right-radius: 0.25rem */
+    margin: 0;
+}
+
+.card .body {
+    width: 100%;               /* w-full */
+    height: 100%;              /* h-full */
+    display: flex;             /* flex */
+    flex-direction: column;    /* flex-col */
+    justify-content: center;   /* justify-center */
+    align-items: flex-start;   /* items-start */
+}
+
+.card .head {
+    display: flex;             /* flex */
+    flex-direction: row;       /* flex-row */
+    align-items: center;       /* items-center */
+    width: 100%; /* w-full */
+    height: 40px;
+}
+
+.card .title {
+    color: #6E7491;            /* text-[#6E7491] */
+    font-size: 1rem;           /* text-base translates to font-size: 1rem */
+    font-weight: 500;          /* font-medium */
+    text-transform: capitalize; /* capitalize */
+    margin-left: 15px ;
+}
+
+.card .price {
+    display: flex;
+    flex: 1;
+    justify-content: end;
+    color: #6E7491;            /* text-[#6E7491] */
+    font-size: 1rem;           /* text-base translates to font-size: 1rem */
+    font-weight: 500;          /* font-medium */
+    margin-right: 15px;
+}
+
+.card .desc {
+    color: #7C8DB0;            /* text-[#7C8DB0] */
+    font-size: 0.875rem;       /* text-sm translates to font-size: 0.875rem */
+    font-weight: 400;          /* font-normal */
+    padding: 0;
+    margin: 0 15px;
+}
+
+.review{
+    display: flex; /* Applies flexbox layout */
+    gap: 1rem; /* Adds a gap of 1rem (16px) between flex items */
+    align-items: flex-start; /* Aligns items to the start of the flex container */
+    width: 33.3333%; /* Sets the width to one-third of the container */
+}
+.review .image{
+    width: 48px;
+    height: 48px;
+    border-radius: 24px;
+}
+.review .body{
+    display: flex; /* Applies flexbox layout */
+    flex-direction: column; /* Arranges flex items in a column */
+    gap: 0.5rem; /* Adds a gap of 0.5rem (8px) between flex items */
+}
+
+.review .p{
+    font-size: 1.25rem; /* Sets the text size to xl (20px) */
+    color: #605DEC; /* Sets the text color to a custom purple-blue color */
+}
