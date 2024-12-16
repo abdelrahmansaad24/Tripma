@@ -19,14 +19,14 @@ function Header(props) {
     const path = usePathname();
     const [user, setUser] = useState(null);
     const closeSignup = () => setSignUp(false);
-    useEffect(async () => {
+    useEffect(() => {
         async function fetchUser() {
             const response = await fetch('/api/auth/verify');
             const data = await response.json();
             setUser(data.user);
         }
 
-        await fetchUser();
+        fetchUser();
     }, []);
     return (
         <div className={classes.navbar} >
