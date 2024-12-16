@@ -1,5 +1,6 @@
 import styles from "./hero.module.css";
 import Search from "@/app/components/search/search";
+import {Suspense} from "react";
 
 
 const Hero = () => {
@@ -8,7 +9,10 @@ const Hero = () => {
             <h1 className={styles.h1}>
                 It&#39;s more than <br/> just a trip
             </h1>
-            <Search/>
+            <Suspense fallback={<div>Loading...</div>}>
+                <Search />
+            </Suspense>
+            {/*<Search/>*/}
         </div>
 
     );
