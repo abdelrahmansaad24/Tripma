@@ -3,7 +3,7 @@ import { MongodbAdapter } from '@lucia-auth/adapter-mongodb';
 import dbConnect from '@/app/lib/dbConnect';
 import process from 'process';
 import { cookies } from 'next/headers';
-import mongoose, {Collection} from 'mongoose';
+import mongoose from 'mongoose';
 
 // Define the schema for the Session
 const sessionSchema = new mongoose.Schema({

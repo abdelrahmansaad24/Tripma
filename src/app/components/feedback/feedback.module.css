@@ -1,0 +1,17 @@
+.feedback{
+    margin: 2rem 4rem;
+}
+
+.h1 {
+    color: #6E7491; /* Sets the text color */
+    font-weight: 600; /* Applies a semi-bold font weight */
+    text-align: center; /* Centers the text horizontally */
+    font-size: 1.5rem; /* Sets the text size to 2xl (24px) */
+}
+
+.review {
+    display: flex; /* Applies flexbox layout */
+    justify-content: space-between; /* Distributes space between items */
+    margin-top: 2rem; /* Adds 2rem (32px) top margin */
+    margin-bottom: 2rem; /* Adds 2rem (32px) bottom margin */
+}

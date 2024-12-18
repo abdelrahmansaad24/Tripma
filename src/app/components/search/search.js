@@ -6,14 +6,14 @@ import calendar from "@/assets/calendar.png";
 import person from "@/assets/person.png";
 
 import { useState, useEffect, useRef } from "react";
-import { DateRange } from "react-date-range";
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
-import { format, parse } from "date-fns";
+import { format } from "date-fns";
 import styles from "./search.module.css";
 import Link from "next/link";
 import Image from "next/image";
 import { useSearchParams } from "next/navigation";
+import TimePicker from "@/app/components/datePicker/timePicker";
 
 const useAutoSuggest = (initialValue = "") => {
     const suggestions = [
@@ -63,7 +63,7 @@ const Search = () => {
     const [state, setState] = useState({
         departure: query.get("departure") || "",
         arrival: query.get("arrival") || "",
-        startDate: initialStartDate,
+        startDate: format(initialStartDate,"dd,MM,yyyy"),
         endDate: initialEndDate,
         adults: parseInt(query.get("adults")) || 1,
         minors: parseInt(query.get("minors")) || 0,
@@ -100,8 +100,8 @@ const Search = () => {
         const queryParams = {
             departure: departureSuggest.input,
             arrival: arrivalSuggest.input,
-            startDate: format(state.startDate, "yyyy-MM-dd"),
-            endDate: state.endDate ? format(state.endDate, "yyyy-MM-dd") : "",
+            startDate: state.startDate,
+            endDate: state.endDate ? state.endDate : "",
             adults: state.adults,
             minors: state.minors,
         };
@@ -111,7 +111,14 @@ const Search = () => {
             .map(([key, value]) => `${key}=${encodeURIComponent(value)}`)
             .join("&");
     };
-
+    const handleDate = (startDate, endDate) => {
+        setState((prev) => ({
+                        ...prev,
+                        startDate: format(startDate, "dd/MM/yyyy"),
+                        endDate: endDate && format(state.endDate, "dd/MM/yyyy")
+        }));
+        closeSelectors();
+    }
     return (
         <div className={styles.search} ref={searchRef}>
             <div className={styles.buttons}>
@@ -180,40 +187,45 @@ const Search = () => {
                     <Image src={calendar} alt="Calendar" />
                     <span
                         className={styles.dateInput}
-                        onClick={() =>
+                        onClick={() =>{
                             setState((prev) => ({
                                 ...prev,
                                 openDate: !prev.openDate,
                                 openOptions: false,
-                            }))
-                        }
+                            }));
+                            departureSuggest.setIsOpen(false);
+                            arrivalSuggest.setIsOpen(false);
+                        }}
                     >
                         {state.openDate
-                            ? `${format(state.startDate, "dd/MM/yyyy")} to ${state.endDate
-                                ? format(state.endDate, "dd/MM/yyyy")
-                                : "Select"}`
+                            ? `${state.startDate} to ${state.endDate
+                                ? state.endDate : "Select"}`
                             : "Depart to Return"}
                     </span>
                     {state.openDate && (
-                        <DateRange
-                            editableDateInputs={true}
-                            onChange={(item) =>
-                                setState((prev) => ({
-                                    ...prev,
-                                    startDate: item.selection.startDate,
-                                    endDate: item.selection.endDate,
-                                }))
-                            }
-                            moveRangeOnFirstSelection={false}
-                            ranges={[
-                                {
-                                    startDate: state.startDate,
-                                    endDate: state.endDate,
-                                    key: "selection",
-                                },
-                            ]}
-                            className={styles.absolute}
-                        />
+                        <div className={styles.absolute}>
+                            <TimePicker handleDate={handleDate}/>
+                        </div>
+
+                        // <DateRange
+                        //     editableDateInputs={true}
+                        //     onChange={(item) =>
+                        //         setState((prev) => ({
+                        //             ...prev,
+                        //             startDate: item.selection.startDate,
+                        //             endDate: item.selection.endDate,
+                        //         }))
+                        //     }
+                        //     moveRangeOnFirstSelection={false}
+                        //     ranges={[
+                        //         {
+                        //             startDate: state.startDate,
+                        //             endDate: state.endDate,
+                        //             key: "selection",
+                        //         },
+                        //     ]}
+                        //     className={styles.absolute}
+                        // />
                     )}
                 </div>
 
@@ -222,22 +234,25 @@ const Search = () => {
                     <Image src={person} alt="Person" />
                     <span
                         className={styles.personInput}
-                        onClick={() =>
+                        onClick={() =>{
                             setState((prev) => ({
                                 ...prev,
                                 openOptions: !prev.openOptions,
                                 openDate: false,
-                            }))
-                        }
+                            }));
+                            departureSuggest.setIsOpen(false);
+                            arrivalSuggest.setIsOpen(false);
+                        }}
                     >
                         {`${state.adults} Adult - ${state.minors} Minor`}
                     </span>
                     {state.openOptions && (
                         <div className={styles.optionsMenu}>
                             <div className={styles.optionItem}>
-                                <span>Adults:</span>
-                                <div>
+                                <span className={styles.textSpan}>Adults:</span>
+                                <div className={styles.optionControls}>
                                     <button
+                                        className={styles.optionButtons}
                                         onClick={() =>
                                             setState((prev) => ({
                                                 ...prev,
@@ -249,6 +264,7 @@ const Search = () => {
                                     </button>
                                     <span>{state.adults}</span>
                                     <button
+                                        className={styles.optionButtons}
                                         onClick={() =>
                                             setState((prev) => ({
                                                 ...prev,
@@ -261,9 +277,10 @@ const Search = () => {
                                 </div>
                             </div>
                             <div className={styles.optionItem}>
-                                <span>Minors:</span>
-                                <div>
+                                <span className={styles.textSpan}>Minors:</span>
+                                <div className={styles.optionControls}>
                                     <button
+                                        className={styles.optionButtons}
                                         onClick={() =>
                                             setState((prev) => ({
                                                 ...prev,
@@ -275,6 +292,7 @@ const Search = () => {
                                     </button>
                                     <span>{state.minors}</span>
                                     <button
+                                        className={styles.optionButtons}
                                         onClick={() =>
                                             setState((prev) => ({
                                                 ...prev,

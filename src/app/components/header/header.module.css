@@ -23,6 +23,10 @@
     cursor: pointer;
     border: none;
 }
+.logo:focus,
+.logo:active{
+    border: none;
+}
 
 .menu{
     cursor: pointer;
@@ -64,6 +68,8 @@
 
 .notActive{
     /* Grey / 400 */
+    display: flex;
+    align-items: center;
     color: #7C8DB0;
 }
 
@@ -109,6 +115,8 @@
 }
 
 .active{
+    display: flex;
+    align-items: center;
     color: #605DEC;
 }
 

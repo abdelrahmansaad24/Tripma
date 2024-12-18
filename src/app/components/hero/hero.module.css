@@ -2,6 +2,7 @@
     /*margin-top: 96px;*/
     width: 100%;
     height: calc(100vh - 96px);
+    background-image: url("@/assets/background.png");
     background-size: cover;
     display: flex;
     justify-content: start;

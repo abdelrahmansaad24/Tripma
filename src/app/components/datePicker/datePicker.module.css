@@ -1,0 +1,46 @@
+.datePickerContainer {
+    display: flex;
+    flex-direction: row;
+    padding: 10px 30px 10px 10px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    width: fit-content;
+    height: 280px;
+}
+
+.radioContainer {
+    display: flex;
+    gap: 0;
+    padding: 0;
+    margin: 0;
+}
+
+.calendarContainer {
+    display: flex;
+    flex-direction: column;
+}
+
+.input {
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 100%;
+}
+
+.doneButton {
+    background-color: #6200ee;
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 6px;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-left: 30px;
+    height: 45px;
+}
+
+.doneButton:hover {
+    background-color: #4500b3;
+}

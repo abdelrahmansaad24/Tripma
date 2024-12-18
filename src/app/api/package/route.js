@@ -5,10 +5,11 @@ export async function GET(req) {
     await dbConnect();
 
     const { searchParams } = new URL(req.url); // Parse query parameters
-    const limit = parseInt(searchParams.get("limit"), 10) || 3;
+    const limit = parseInt(searchParams.get("limit"), 10) || null;
 
     try {
-        const packages = await Package.findFirstPackages(limit)
+        const packages = limit? await Package.findFirstPackages(limit) : await Package.findAllPackages();
+
         return new Response(
             JSON.stringify(packages),
             { status: 200, headers: { "Content-Type": "application/json" } }

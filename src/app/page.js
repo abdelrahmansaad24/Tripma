@@ -1,6 +1,7 @@
 import Hero from "@/app/components/hero/hero";
 import Deals from "@/app/components/deals/deals";
 import Link from "next/link";
+import Feedback from "@/app/components/feedback/feedback";
 
 export default function Home() {
   return (
@@ -11,7 +12,7 @@ export default function Home() {
           <Link className={"Link"} href={'/hotels'}>
             <button className={"button"}>Explore more stays</button>
           </Link>
-          {/*<Feedback/>*/}
+          <Feedback/>
       </div>
   );
 }

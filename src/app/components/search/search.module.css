@@ -89,13 +89,24 @@
     width: 100%;
 }
 
-.textButton {
-    text-transform: uppercase;
-    cursor: pointer;
-    background-color: transparent;
-    padding: 0.25rem 0.75rem;
-    color: #7C8DB0;
-    margin-top: 0.25rem;
+.textButtons {
+
+    /* Auto layout */
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 0;
+    gap: 8px;
+
+    width: 112px;
+    height: 32px;
+    background: white;
+
+    /* Inside auto layout */
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+
 }
 
 .textButton:hover {
@@ -123,9 +134,16 @@
 
 .absolute {
     position: absolute;
-    top: 40px;
+    top: 0;
     background-color: #FFFFFF;
     z-index: 1;
+    width: 520px;
+    display: flex;
+    flex-direction: row;
+    padding: 10px 30px 10px 10px;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    height: 280px;
 }
 
 .person {
@@ -161,7 +179,51 @@
     min-height: 48px;
 }
 
+.optionControls{
+    /* incrementer */
 
+    /* Auto layout */
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 0px;
+    gap: 8px;
+
+    width: 112px;
+    height: 32px;
+
+
+    /* Inside auto layout */
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+
+}
+
+.optionButtons{
+    /* Increment */
+    border: none;
+    width: 32px;
+    height: 32px;
+    font-size: x-large;
+    /* Vector */
+
+    /* Purple Blue */
+    color: #605DEC;
+
+    /* Grey / 100
+
+    Provides a near-white grey that can be used to contrast against pure white.
+    */
+    background: #FAFAFA;
+    border-radius: 4px;
+
+    /* Inside auto layout */
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+
+}
 .searchButtonLg {
     height: 100%;
 }
@@ -176,21 +238,83 @@
     margin-top: 10px;
     position: absolute;
     top: 30px;
-    width: 200px;
-    height: fit-content; /* This is equivalent to h-fit */
-    display: flex; /* This is equivalent to flex */
-    flex-direction: column; /* This is equivalent to flex-col */
-    gap: 1rem; /* This is equivalent to gap-4 */
-    border-radius: 0.375rem; /* This is equivalent to rounded-md */
-    background-color: white; /* This is equivalent to bg-white */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Assuming shadowCard is a custom shadow class */
+    /* Popover / Increment */
 
+    box-sizing: border-box;
+
+    /* Auto layout */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 16px;
+    gap: 8px;
+
+    width: 232px;
+    height: 104px;
+
+    background: #FFFFFF;
+    border: 1px solid #CBD4E6;
+    /* elevation / medium */
+    box-shadow: 0px 2px 4px rgba(7, 4, 146, 0.1), 0px 24px 60px rgba(6, 47, 125, 0.05), 0px 12px 24px rgba(27, 59, 119, 0.05);
+    border-radius: 8px;
+
+    /* Inside auto layout */
+    flex: none;
+    order: 0;
+    flex-grow: 1;
 }
 
+
 .optionItem {
+    /* row */
+
+    /* Auto layout */
     display: flex;
-    justify-content: space-between; /* This is equivalent to justify-between */
-    align-items: center; /* This is equivalent to items-center */
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 0px;
+    gap: 8px;
+
+    width: 200px;
+    height: 32px;
+
+
+    /* Inside auto layout */
+    flex: none;
+    order: 0;
+    align-self: stretch;
+    flex-grow: 0;
+
+    /*margin: 5px;*/
+    /*display: flex;*/
+    /*!*justify-content: space-between; !* This is equivalent to justify-between *!*!*/
+    /*align-items: center; !* This is equivalent to items-center *!*/
+}
+
+.textSpan{
+    /* label */
+
+    width: 80px;
+    height: 32px;
+
+    /* Body Default */
+    font-family: 'Nunito Sans', system-ui;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 22px;
+    display: flex;
+    align-items: center;
+
+    /* Grey / 600 */
+    color: #6E7491;
+
+
+    /* Inside auto layout */
+    flex: none;
+    order: 0;
+    flex-grow: 1;
 }
 .optionLabel {
     color: #7C8DB0; /* This is equivalent to text-[#7C8DB0] */
@@ -229,9 +353,6 @@
     .departure {
         border-top-left-radius: 4px;
         border-bottom-left-radius: 4px;
-    }
-    .absolute {
-        top: 5rem;
     }
     .person, .placeInput, .date{
         height: 100%;

@@ -1,16 +1,16 @@
 import dbConnect from "@/app/lib/dbConnect";
-import Hotel from "@/app/lib/models/hotel";
+import Review from "@/app/lib/models/review";
 
 export async function GET(req) {
     await dbConnect();
 
     const { searchParams } = new URL(req.url); // Parse query parameters
-    const limit = parseInt(searchParams.get("limit"), 10) || null;
+    const limit = parseInt(searchParams.get("limit"), 10) || 3;
 
     try {
-        const hotels = limit? await Hotel.findFirstHotels(limit) : await Hotel.findAllHotels();
+        const reviews = await Review.findFirstReviews(limit);
         return new Response(
-            JSON.stringify(hotels),
+            JSON.stringify(reviews),
             { status: 200, headers: { "Content-Type": "application/json" } }
         );
     } catch (error) {

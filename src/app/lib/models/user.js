@@ -42,7 +42,7 @@ UserSchema.pre('validate', function (next) {
 });
 await dbConnect();
 // Create the model or reuse the existing one
-const User = mongoose.models.User || mongoose.model('User', UserSchema);
+export const User = mongoose.models.User || mongoose.model('User', UserSchema);
 
 // Ensure unique index on phone field allows multiple null values
 async function ensureUniqueIndex() {
