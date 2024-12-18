@@ -6,8 +6,6 @@ import calendar from "@/assets/calendar.png";
 import person from "@/assets/person.png";
 
 import { useState, useEffect, useRef } from "react";
-import "react-date-range/dist/styles.css";
-import "react-date-range/dist/theme/default.css";
 import { format } from "date-fns";
 import styles from "./search.module.css";
 import Link from "next/link";
