@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect } from 'react';
+import React, {Suspense, useEffect} from 'react';
 import Search from "@/app/components/search/search";
 import Link from "next/link";
 import Deals from "@/app/components/deals/deals";
