@@ -1,46 +1,410 @@
-.datePickerContainer {
-    display: flex;
-    flex-direction: row;
-    padding: 10px 30px 10px 10px;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-    width: fit-content;
-    height: 280px;
-}
-
-.radioContainer {
-    display: flex;
-    gap: 0;
-    padding: 0;
-    margin: 0;
-}
-
 .calendarContainer {
+    font-family: Arial, sans-serif;
+    /* .base / Date Picker */
+
+    box-sizing: border-box;
+
+    /* Auto layout */
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
+    padding: 0;
+
+    position: absolute;
+    width: 642px;
+    height: 395px;
+    left: -274px;
+    top: -20px;
+
+    background: #FFFFFF;
+    /* Grey / 200
+
+    Used for outlines or inactive buttons
+
+    */
+    border: 1px solid #CBD4E6;
+    /* elevation / medium */
+    box-shadow: 0 2px 4px rgba(7, 4, 146, 0.1), 0 24px 60px rgba(6, 47, 125, 0.05), 0 12px 24px rgba(27, 59, 119, 0.05);
+    border-radius: 12px;
+
 }
 
-.input {
-    padding: 0.5rem;
-    font-size: 1rem;
-    border: 1px solid #ccc;
+.header{
+    /* field section */
+
+    /* Auto layout */
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+    /*padding: 20px 24px;*/
+    gap: 26px;
+
+    width: 642px;
+    height: 88px;
+
+
+    /* Inside auto layout */
+    flex: none;
+    order: 0;
+    align-self: stretch;
+    flex-grow: 0;
+
+}
+
+.tripToggle {
+    /* radio group */
+
+    /* Auto layout */
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0px;
+    gap: 4px;
+    justify-content: start;
+    width: 204px;
+    height: 30px;
+    margin-left: 20px;
+    /* Inside auto layout */
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+.toggleLable{
+    /* Radio Button */
+
+    /* Auto layout */
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 4px 0;
+    gap: 4px;
+
+    width: 100px;
+    height: 30px;
+    /* label */
+
+
+    /* Body Default */
+    font-family: 'Nunito Sans', system-ui;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    /*line-height: 22px;*/
+    /* identical to box height */
+    /* Grey / 600 */
+    color: #6E7491;
+
+}
+
+.date{
+    /* .base / text input */
+
+    box-sizing: border-box;
+
+    /* Auto layout */
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    padding: 8px 12px;
+    gap: 8px;
+
+    width: 252px;
+    height: 48px;
+
+    /* True White */
+    background: #FFFFFF;
+    /* Purple Blue */
+    border: 2px solid #605DEC;
     border-radius: 4px;
-    width: 100%;
+
 }
 
-.doneButton {
-    background-color: #6200ee;
-    color: white;
-    border: none;
-    padding: 0.75rem 1.5rem;
-    border-radius: 6px;
-    font-size: 1rem;
+.dateInput{
+    /* label */
+
+    width: 188px;
+    height: 32px;
+
+    /* Body Large */
+    font-family: 'Nunito Sans', ui-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 25px;
+    display: flex;
+    align-items: center;
+
+    /* Grey / 800 */
+    color: #36374A;
+
+
+
+}
+.arrows {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    height: 307px;
+    /*margin-left: 16px;*/
     cursor: pointer;
-    margin-left: 30px;
-    height: 45px;
+    width: 35px;
 }
 
-.doneButton:hover {
-    background-color: #4500b3;
+.arrowsRight {
+    display: flex;
+    align-items: center;
+    /*justify-content: center;*/
+    height: 307px;
+    margin-right: 16px;
+    cursor: pointer;
+    flex: 1;
+    justify-content: start;
+}
+
+.arrow {
+    width: 32px;
+    height: 32px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.arrow:hover {
+    background-color: #f0f0f0;
+}
+
+.arrow{
+    /* 32 / chevron Left */
+
+    width: 16px;
+    height: 16px;
+
+    border-radius: 4px;
+
+    /* Inside auto layout */
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+
+}
+.dateSelector{
+    /* calendar section */
+
+    /* Auto layout */
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 8px 8px 16px;
+
+    width: 642px;
+    height: 307px;
+
+    background: #FFFFFF;
+
+    /* Inside auto layout */
+    flex: none;
+    order: 2;
+    align-self: stretch;
+    flex-grow: 0;
+}
+.dateSelector button {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    border-radius: 4px;
+    text-align: center;
+}
+
+.calendarDropdown {
+    position: absolute;
+    background: #fff;
+    border-radius: 8px;
+    z-index: 10;
+}
+
+.month {
+    /* month 3 */
+
+    /* Auto layout */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    /*padding: 16px;*/
+    /*gap: 8px;*/
+    margin: 16px;
+    width: 256px;
+    height: 253px;
+
+    background: #FFFFFF;
+
+    /* Inside auto layout */
+    flex: none;
+    order: 2;
+    flex-grow: 0;
+
+}
+
+.h4 {
+    text-align: center;
+    margin-bottom: 10px;
+}
+.months{
+    display: flex;
+    flex-direction: row;
+}
+.calendarGrid{
+    width: 224px;
+    margin: 16px;
+}
+.calendarGrid .dayHeader {
+    /*font-weight: bold;*/
+    text-align: center;
+    /*margin: 0;*/
+    margin-bottom: 5px;
+    /*padding: 8px;*/
+    padding: 0;
+    /* Calendar Date */
+
+    width: 32px;
+    height: 32px;
+
+}
+.title{
+    /* month year */
+
+    width: 224px;
+    height: 19px;
+
+    /* Header H6 */
+    font-family: 'Nunito Sans', system-ui;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 19px;
+    /* identical to box height */
+    display: flex;
+    align-items: center;
+
+    color: #000000;
+    margin: 8px;
+    padding: 0;
+}
+.days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    text-align: center;
+}
+
+.activeDay {
+    /* .base / calendar / date */
+
+    /* True White */
+    background: #FFFFFF;
+    /* label */
+    /* Body Small */
+    font-family: 'Nunito Sans', system-ui;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 19px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    /* Grey / 900 */
+    color: #27273F;
+    height: 24px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.activeDay:hover {
+    background-color: #f0f0f0;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.inactiveDay {
+    /*visibility: hidden;*/
+    color: #7C8DB0;
+
+    /* True White */
+    background: #FFFFFF;
+    /* label */
+    /* Body Small */
+    font-family: 'Nunito Sans', system-ui;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 19px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    /* Grey / 900 */
+    height: 24px;
+    border-radius: 4px;
+
+}
+
+.seletedDay{
+    color: white;
+
+    /* True White */
+    /* Body Small */
+    font-family: 'Nunito Sans', system-ui;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 19px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    /* Grey / 900 */
+    height: 24px;
+
+    /* Purple Blue */
+    background: #605DEC;
+    border-radius: 100px;
+
+}
+
+.doneBtn {
+    /* button */
+
+    /* Auto layout */
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 12px 20px;
+    gap: 8px;
+
+    width: 84px;
+    height: 48px;
+    border: none;
+    /* Purple Blue */
+    background: #605DEC;
+    border-radius: 4px;
+
+
+
+    /* Body Large */
+    font-family: 'Nunito Sans', system-ui;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 25px;
+
+    /* Grey / 100 */
+    color: #FAFAFA;
+
+
+
+}
+
+.doneBtn:hover {
+    background: #0056b3;
 }

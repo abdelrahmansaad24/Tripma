@@ -1,0 +1,25 @@
+.header {
+    display: flex;       /* flex */
+    flex-direction: row;
+    /* Auto layout */
+    padding: 0;
+    justify-content: start;
+    min-height: 70px;
+    height: fit-content;
+    max-height: 230px;
+    /*margin-bottom: 24px;*/
+}
+
+.container{
+    margin:20px 64px;
+    height:48px;
+}
+
+/* Responsive design for large screens */
+@media  (max-width: 1024px) {
+    .container{
+        width: 100%;
+        margin-top: 80px;
+        height: 240px;
+    }
+}

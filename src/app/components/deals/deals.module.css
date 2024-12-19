@@ -114,6 +114,10 @@
     font-weight: 400;          /* font-normal */
 }
 
+
+
+
+
 @media (min-width: 768px) {   /* md */
     .headText {
         font-weight: 700;        /* md:font-bold */
@@ -127,6 +131,7 @@
         display: block;          /* md:block */
     }
 }
+
 
 @media (max-width: 640px) {   /* sm */
     .headText {

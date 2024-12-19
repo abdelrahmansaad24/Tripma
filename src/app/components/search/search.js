@@ -5,8 +5,9 @@ import arrival from "@/assets/arrival.png";
 import calendar from "@/assets/calendar.png";
 import person from "@/assets/person.png";
 
+// import { parse } from 'date-fns';
 import { useState, useEffect, useRef } from "react";
-import { format } from "date-fns";
+import {format, formatDate, parse} from "date-fns";
 import styles from "./search.module.css";
 import Link from "next/link";
 import Image from "next/image";
@@ -49,24 +50,32 @@ const useAutoSuggest = (initialValue = "") => {
     };
 };
 
-const Search = () => {
+const Search =  () => {
     const query = useSearchParams();
+
     const initialStartDate = query.get("startDate")
-        ? parse(query.get("startDate"), "yyyy-MM-dd", new Date())
-        : new Date();
-    const initialEndDate = query.get("endDate")
-        ? parse(query.get("endDate"), "yyyy-MM-dd", new Date())
+        ? parse(query.get("startDate"),"dd/MM/yyyy",new Date())
         : null;
 
+    const initialEndDate = query.get("endDate")
+        ? parse(query.get("endDate"), "dd/MM/yyyy", new Date())
+        : null;
+
+    console.log(initialStartDate)
     const [state, setState] = useState({
         departure: query.get("departure") || "",
         arrival: query.get("arrival") || "",
-        startDate: format(initialStartDate,"dd,MM,yyyy"),
-        endDate: initialEndDate,
+        startDate: initialStartDate instanceof Date && !isNaN(initialStartDate)
+            ? format(initialStartDate, "dd/MM/yyyy")
+            : null,
+        endDate: initialEndDate instanceof Date && !isNaN(initialEndDate)
+            ? format(initialEndDate, "dd/MM/yyyy")
+            : null,
         adults: parseInt(query.get("adults")) || 1,
         minors: parseInt(query.get("minors")) || 0,
         openDate: false,
         openOptions: false,
+        date: query.get('date')? query.get('date') : "Depart to Return",
     });
 
     const departureSuggest = useAutoSuggest(state.departure);
@@ -102,6 +111,7 @@ const Search = () => {
             endDate: state.endDate ? state.endDate : "",
             adults: state.adults,
             minors: state.minors,
+            date: state.date,
         };
 
         return Object.entries(queryParams)
@@ -109,11 +119,12 @@ const Search = () => {
             .map(([key, value]) => `${key}=${encodeURIComponent(value)}`)
             .join("&");
     };
-    const handleDate = (startDate, endDate) => {
+    const handleDate = (startDate, endDate, date) => {
         setState((prev) => ({
-                        ...prev,
-                        startDate: format(startDate, "dd/MM/yyyy"),
-                        endDate: endDate && format(state.endDate, "dd/MM/yyyy")
+            ...prev,
+            startDate: startDate && format(startDate, "dd/MM/yyyy"),
+            endDate: endDate && format(endDate, "dd/MM/yyyy"),
+            date: date,
         }));
         closeSelectors();
     }
@@ -122,7 +133,7 @@ const Search = () => {
             <div className={styles.buttons}>
                 {/* Departure Input */}
                 <div className={styles.placeInput}>
-                    <Image src={departure} alt="Departure" />
+                    <Image src={departure} alt="Departure"/>
                     <input
                         type="text"
                         placeholder="From where?"
@@ -131,7 +142,7 @@ const Search = () => {
                         onFocus={() => {
                             departureSuggest.setIsOpen(true);
                             arrivalSuggest.setIsOpen(false);
-                            setState((prev) => ({ ...prev, openDate: false, openOptions: false }));
+                            setState((prev) => ({...prev, openDate: false, openOptions: false}));
                         }}
                         className={styles.textInput}
                     />
@@ -152,7 +163,7 @@ const Search = () => {
 
                 {/* Arrival Input */}
                 <div className={styles.placeInput}>
-                    <Image src={arrival} alt="Arrival" />
+                    <Image src={arrival} alt="Arrival"/>
                     <input
                         type="text"
                         placeholder="Where to?"
@@ -161,7 +172,7 @@ const Search = () => {
                         onFocus={() => {
                             arrivalSuggest.setIsOpen(true);
                             departureSuggest.setIsOpen(false);
-                            setState((prev) => ({ ...prev, openDate: false, openOptions: false }));
+                            setState((prev) => ({...prev, openDate: false, openOptions: false}));
                         }}
                         className={styles.textInput}
                     />
@@ -182,10 +193,10 @@ const Search = () => {
 
                 {/* Date Picker */}
                 <div className={styles.date}>
-                    <Image src={calendar} alt="Calendar" />
+                    <Image src={calendar} alt="Calendar"/>
                     <span
                         className={styles.dateInput}
-                        onClick={() =>{
+                        onClick={() => {
                             setState((prev) => ({
                                 ...prev,
                                 openDate: !prev.openDate,
@@ -195,44 +206,21 @@ const Search = () => {
                             arrivalSuggest.setIsOpen(false);
                         }}
                     >
-                        {state.openDate
-                            ? `${state.startDate} to ${state.endDate
-                                ? state.endDate : "Select"}`
-                            : "Depart to Return"}
+                        {state.date}
                     </span>
                     {state.openDate && (
                         <div className={styles.absolute}>
                             <TimePicker handleDate={handleDate}/>
                         </div>
-
-                        // <DateRange
-                        //     editableDateInputs={true}
-                        //     onChange={(item) =>
-                        //         setState((prev) => ({
-                        //             ...prev,
-                        //             startDate: item.selection.startDate,
-                        //             endDate: item.selection.endDate,
-                        //         }))
-                        //     }
-                        //     moveRangeOnFirstSelection={false}
-                        //     ranges={[
-                        //         {
-                        //             startDate: state.startDate,
-                        //             endDate: state.endDate,
-                        //             key: "selection",
-                        //         },
-                        //     ]}
-                        //     className={styles.absolute}
-                        // />
                     )}
                 </div>
 
                 {/* Person Picker */}
                 <div className={styles.person}>
-                    <Image src={person} alt="Person" />
+                    <Image src={person} alt="Person"/>
                     <span
                         className={styles.personInput}
-                        onClick={() =>{
+                        onClick={() => {
                             setState((prev) => ({
                                 ...prev,
                                 openOptions: !prev.openOptions,

@@ -12,7 +12,7 @@
 .h1{
     font-family: 'Nunito Sans', system-ui;
     font-style: normal;
-    font-weight: 800;
+    font-weight: 700;
     font-size: 96px;
     line-height: 90px;
     /* or 94% */
@@ -21,10 +21,13 @@
     text-align: center;
     justify-content: center;
     height: 37%;
-    background: radial-gradient(#7e27a6,#29b5f4);
+    background: radial-gradient(#7a46fb, #4d8cfb);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     width: 100%;
     padding: 0;
     margin: 5% 0;
+
+    /* It’s more than just a trip */
+
 }

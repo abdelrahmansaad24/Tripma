@@ -1,13 +1,10 @@
 .navbar {
-    position: absolute;
-    margin: 0;
     padding: 0;
-    left: 0;
-    top: 0;
     right: 0;
     height: 96px;
     background-color: #FFFFFF;
     z-index: 99;
+    /*margin-bottom: 64px;*/
 }
 .header{
     display: flex;
@@ -132,6 +129,65 @@
 
 .dropMenu a{
     text-decoration: none;
+}
+
+.close{
+    /* 32 / x close no */
+
+    margin: 20px;
+
+    width: 12px;
+    height: 12px;
+
+}
+
+.promotion{
+    /* Banner Promotion */
+
+    /* Auto layout */
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    /*padding: 16px 32px;*/
+    gap: 10px;
+
+    position: absolute;
+    width: 100%;
+    height: 64px;
+    left: 0;
+    top: 0;
+
+    /* Purple Blue */
+    background: #605DEC;
+}
+
+.text{
+    /* Join Tripma today and save up to 20% on your flight using code TRAVEL at checkout. Promotion valid for new users only. */
+    margin: 20px;
+    width: 1334px;
+    height: 25px;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    /* Header H4 */
+    font-family: 'Nunito Sans', system-ui;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 25px;
+    /* identical to box height */
+    align-items: center;
+    text-align: center;
+
+    /* Purple White */
+    color: #F6F6FE;
+
+
+    /* Inside auto layout */
+    flex: none;
+    order: 0;
+    flex-grow: 1;
+
 }
 
 /* When the width is 800px or larger, show .show-on-large and hide .show-on-small */
