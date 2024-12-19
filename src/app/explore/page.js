@@ -22,7 +22,9 @@ const Page = () => {
         <>
             <div className={styles.header}>
                 <div className={styles.container}>
-                    <Search/>
+                    <Suspense fallback={<div>Loading...</div>}>
+                        <Search />
+                    </Suspense>
                 {/*<div className="mt-16">*/}
                 {/*    <FlightChoose />*/}
                 </div>
