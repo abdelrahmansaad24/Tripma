@@ -1,0 +1,192 @@
+.header{
+    position: fixed;
+    height: 50px;
+    width: 100%;
+    top: 0;
+}
+.header p{
+    /* code */
+    position: absolute;
+    /*width: 87px;*/
+    margin: 10px 0;
+    font-family: 'Nunito Sans', system-ui;
+    font-style: normal;
+    line-height: 33px;
+    /* identical to box height */
+    display: flex;
+    align-items: center;
+    text-transform: uppercase;
+    /* Grey / 100 */
+    color: #FAFAFA;
+}
+
+.depart{
+    font-weight: 700;
+    font-size: 22px;
+    left: 1.8%;
+}
+
+.arrive{
+    font-weight: 700;
+    font-size: 22px;
+
+    left: 13%;
+}
+
+.departDate{
+    left: 22.2%;
+    font-weight: 500;
+    font-size: 16px;
+}
+
+.arriveDate{
+    left: 37%;
+    font-weight: 500;
+    font-size: 16px;
+}
+
+.footer{
+    margin: 0;
+    padding: 0;
+    position: fixed;
+    /*bottom: 50px;*/
+}
+
+.footer .name, .footer .seat{
+    position: fixed;
+    /*width: 87px;*/
+    margin: 10px 0;
+    bottom: 0;
+    /* name */
+    font-family: 'Nunito Sans', system-ui;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 25px;
+    /* identical to box height */
+    display: flex;
+    align-items: center;
+    /* Grey / 600 */
+    color: #6E7491;
+}
+
+.name{
+    left: 52.2%;
+}
+
+.seat{
+    left: 65.7%;
+}
+
+.buttonsRow{
+    /* button row */
+
+    /* Auto layout */
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    gap: 16px;
+
+    width: 281px;
+    height: 48px;
+
+    position: fixed;
+    bottom: 1%;
+    left: 75%;
+}
+
+.saveButton{
+    /* button */
+    display: flex;
+    box-sizing: border-box;
+
+    /* Auto layout */
+    align-items: center;
+    padding: 12px 20px;
+    gap: 8px;
+
+    width: 148px;
+    height: 48px;
+    /* Purple Blue */
+    border: 1px solid #605DEC;
+    border-radius: 4px;
+    cursor: pointer;
+    z-index: 10000;
+}
+.saveButton p{
+    /* Body Default */
+    font-family: 'Nunito Sans', system-ui;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 16px;
+    /* Purple Blue */
+    color: #605DEC;
+}
+
+.doneButton ,.done{
+    /* button */
+    cursor: pointer;
+    box-sizing: border-box;
+
+    /* Auto layout */
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 12px 20px;
+    gap: 8px;
+
+    width: 117px;
+    height: 48px;
+    justify-content: center;
+    border-radius: 4px;
+
+}
+
+.doneButton{
+    background: rgba(203, 212, 230, 0.3);
+    /* Grey / 400 */
+    border: 1px solid #7C8DB0;
+}
+
+.done{
+    background: #605DEC;
+    border: none;
+}
+
+.doneButton p, .done p{
+    /* label */
+
+    /*width: 77px;*/
+    /*height: 22px;*/
+
+    /* Body Default */
+    font-family: 'Nunito Sans', system-ui;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 22px;
+    /* identical to box height */
+    display: flex;
+    align-items: center;
+
+
+}
+.done p{
+    color: #FFFFFF;
+}
+.doneButton p{
+    /* Grey / 400 */
+    color: #7C8DB0;
+}
+
+.done:hover{
+    background: #FFFFFF;
+
+    border: 1px solid #605DEC;
+}
+
+.done:hover p{
+    color: #605DEC;
+}

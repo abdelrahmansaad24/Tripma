@@ -55,11 +55,16 @@ async function ensureUniqueIndex() {
 
     if (usersCollectionExists) {
         // Ensure indexes are updated to allow sparse unique constraint
-        await mongoose.connection.db.collection('users').dropIndex('phone_1');
-        await mongoose.connection.db.collection('users').createIndex({ phone: 1 }, { unique: true, sparse: true });
-        await mongoose.connection.db.collection('users').dropIndex('email_1');
-        await mongoose.connection.db.collection('users').createIndex({ email: 1 }, { unique: true, sparse: true });
-        console.log('Unique index on phone and email fields updated');
+        try{
+            await mongoose.connection.db.collection('users').dropIndex('phone_1');
+            await mongoose.connection.db.collection('users').createIndex({ phone: 1 }, { unique: true, sparse: true });
+            await mongoose.connection.db.collection('users').dropIndex('email_1');
+            await mongoose.connection.db.collection('users').createIndex({ email: 1 }, { unique: true, sparse: true });
+            console.log('Unique index on phone and email fields updated');
+        } catch (error) {
+
+        }
+
     }
 }
 
@@ -85,6 +90,16 @@ class UserManager {
         await dbConnect();
         try {
             const user = await User.findById(userId);
+            return { success: true, user };
+        } catch (error) {
+            return { success: false, error: error.message };
+        }
+    }
+
+    static async findUserByQuery(query) {
+        await dbConnect(); // Ensure database connection
+        try {
+            const user = await User.find(query);
             return { success: true, user };
         } catch (error) {
             return { success: false, error: error.message };

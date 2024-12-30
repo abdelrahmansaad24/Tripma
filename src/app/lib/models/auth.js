@@ -4,16 +4,18 @@ import dbConnect from '@/app/lib/dbConnect';
 import process from 'process';
 import { cookies } from 'next/headers';
 import mongoose from 'mongoose';
+// import dbConnect from "@/app/lib/dbConnect";
+import {User} from "./user"
 
-// Define the schema for the Session
-const sessionSchema = new mongoose.Schema({
-    userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
-    sessionId: { type: String, required: true, unique: true },
-    expiresAt: { type: Date, required: true }
-});
-
+// const mongoose = require('mongoose');
+const sessionSchema = new mongoose.Schema(
+    {
+        userId:
+            { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+        expiresAt: { type: Date, required: true } });
+// const Session = mongoose.model('Session', sessionSchema);
 // Create the model or reuse the existing one
-const Session = mongoose.models.Session || mongoose.model('Session', sessionSchema);
+export const Session = mongoose.models.Session || mongoose.model('Session', sessionSchema);
 
 // Function to create session table if it doesn't exist
 async function createSessionTable() {
@@ -36,11 +38,16 @@ async function initializeLucia() {
     const Session = collections.find(collection => collection.collectionName === 'sessions');
     const adapter = new MongodbAdapter(Session, User);
 
+    //
+    // const adapter = new MongodbAdapter(
+    //     Session,User );
+
     const lucia = new Lucia(adapter, {
         sessionCookie: {
             expires: false,
             attributes: { secure: process.env.NODE_ENV === 'production' }
         }
+
     });
     try {
         await createSessionTable().catch(error => console.error('Error creating session table:', error));
@@ -55,9 +62,13 @@ const lucia = await initializeLucia();
 export async function createAuthSession(userId) {
     const lucia = await initializeLucia();
     try {
-        const session = await lucia.createSession(userId, {});
-
-        const sessionCookie = await lucia.createSessionCookie(session.id.toString());
+        // const id =  userId.toString()
+        let currentDate = new Date();
+        currentDate.setDate(currentDate.getDate() + 7);
+        const session = new Session({userId , expiresAt: currentDate});
+        await session.save();
+        // console.log(JSON.parse(session._id.toString()));
+        const sessionCookie = await lucia.createSessionCookie(session._id);
         console.log(sessionCookie.name);
         (await cookies()).set(sessionCookie.name, sessionCookie.value, sessionCookie.attributes);
         const plainSession = JSON.parse(JSON.stringify(session)); // Pass the plain object to the client component

@@ -1,0 +1,486 @@
+.page{
+    margin-left: 96px;
+    padding: 0;
+    height: fit-content;
+}
+.header{
+    /*margin-left: 96px;*/
+    /* Header H3 */
+    font-family: 'Nunito Sans', system-ui;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 33px;
+    /* identical to box height */
+    display: flex;
+    align-items: center;
+    /* Purple Blue */
+    color: #605DEC;
+}
+
+.headerText{
+    /* Enter the required information for each traveler and be sure that it exactly matches the government-issued ID presented at the airport. */
+
+    /*position: absolute;
+    */width: 682px;
+    /*height: 50px;*/
+    /*left: 96px;*/
+    /*top: 201px;*/
+    max-width: 682px;
+    /* Body Large */
+    font-family: 'Nunito Sans', system-ui;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 25px;
+
+    /* Grey / 400 */
+    color: #7C8DB0;
+}
+
+.container{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    margin-top: 32px;
+}
+
+.info{
+    width: 100%;
+    max-width: 682px;
+    height: 20px;
+}
+
+.price{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    flex: 1;
+    margin-right: 96px;
+
+    align-items: flex-end; /* Aligns children to the right */
+    justify-content: flex-end; /* Keeps elements aligned at the bottom */
+}
+
+.seats, .confirm{
+    /* button */
+    box-sizing: border-box;
+
+    /* Auto layout */
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 12px 20px;
+    gap: 8px;
+
+    width: 138px;
+    height: 48px;
+
+    border-radius: 4px;
+
+    text-decoration: none;
+    margin: 16px 0 80px 0;
+    cursor: pointer;
+}
+
+.seats{
+    background: rgba(203, 212, 230, 0.3);
+    /* Grey / 400 */
+    /*color: #7C8DB0;*/
+    border: 1px solid #7C8DB0;
+}
+
+.seats p,.confirm p{
+    /* label */
+
+    width: 98px;
+    height: 25px;
+
+    /* Body Large */
+    font-family: 'Nunito Sans', system-ui;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 25px;
+    /* identical to box height */
+    display: flex;
+    align-items: center;
+}
+
+.confirm p{
+    color: #FFFFFF;
+
+}
+.seats p{
+    /* Grey / 400 */
+    color: #7C8DB0;
+}
+
+/* CSS Styles */
+.passengerForm {
+    margin-bottom: 32px;
+}
+.passengerForm h3{
+    /* Passenger 1 (Adult) */
+    width: 166px;
+    height: 25px;
+    /* Header H4 */
+    font-family: 'Nunito Sans', system-ui;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 25px;
+    /* identical to box height */
+    display: flex;
+    align-items: center;
+
+    /* Grey / 600 */
+    color: #6E7491;
+}
+.inputGroup {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 16px;
+}
+.inputGroup input {
+    margin-top: 16px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding-left: 8px;
+    /* Text Input */
+
+    /* Auto layout */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+
+    width: 200px;
+    height: 48px;
+}
+.inputGroup .dob{
+    /* .base / text input */
+
+    box-sizing: border-box;
+
+    /* Auto layout */
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 8px 12px;
+    gap: 8px;
+    /*justify-content: center;*/
+    width: 252px;
+    height: 52px;
+
+    /* True White */
+    background: #FFFFFF;
+    /* Grey / 300 */
+    border: 1px solid #A1B0CC;
+    border-radius: 4px;
+    /*padding-left: 8px;*/
+}
+
+.secondInputGroup {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 16px;
+}
+
+.secondInputGroup input{
+    /* Text Input */
+
+    /* Auto layout */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-left: 8px;
+    gap: 4px;
+
+    width: 300px;
+    height: 48px;
+    /* True White */
+    background: #FFFFFF;
+    /* Grey / 300 */
+    border: 1px solid #A1B0CC;
+    border-radius: 4px;
+}
+
+.emergencyHeader{
+    margin-top: 48px;
+    margin-bottom: 16px;
+    /* Emergency contact information */
+
+    width: 255px;
+    height: 25px;
+
+    /* Header H4 */
+    font-family: 'Nunito Sans', system-ui;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 25px;
+    /* identical to box height */
+    display: flex;
+    align-items: center;
+
+    /* Grey / 600 */
+    color: #6E7491;
+}
+
+.checkbox{
+    /* Checkbox */
+    margin-bottom: 10px;
+    /* Auto layout */
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 4px 0;
+    gap: 8px;
+
+    width: 178px;
+    height: 30px;
+}
+
+.checkbox input{
+    /* Checkbox */
+    width: 16px;
+    height: 16px;
+    /* Inside auto layout */
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+
+.checkbox label{
+    /* label */
+
+    width: 154px;
+
+    /* Body Default */
+    font-family: 'Nunito Sans', system-ui;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 22px;
+    /* identical to box height */
+    display: flex;
+    align-items: center;
+
+    /* Grey / 600 */
+    color: #6E7491;
+
+
+    /* Inside auto layout */
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+}
+
+.bagsInfo{
+    display: flex;
+    flex-direction: column;
+    margin-top: 32px;
+}
+
+.bagsInfo h3{
+    /* Bag information */
+    width: 132px;
+    height: 25px;
+    /* Header H4 */
+    font-family: 'Nunito Sans', system-ui;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 25px;
+    /* identical to box height */
+    display: flex;
+    align-items: center;
+    padding: 0;
+    margin-bottom: 8px;
+    /* Grey / 600 */
+    color: #6E7491;
+}
+
+.bagsInfo p{
+    /* Each passenger is allowed one free carry-on bag and one personal item. First checked bag for each passenger is also free. Second bag check fees are waived for loyalty program members. See the full bag policy. */
+    padding: 0;
+    margin: 0;
+    width: 682px;
+    height: 75px;
+    /* Body Large */
+    font-family: 'Nunito Sans', system-ui;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 18px;
+    line-height: 25px;
+
+    /* Grey / 400 */
+    color: #7C8DB0;
+}
+
+.bagInput{
+    margin-top: 32px;
+    display: flex;
+    flex-direction: row;
+    gap: 343px;
+}
+
+.bagInput div{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.bagInput p{
+    /* Passenger 1 */
+
+    width: 101px;
+    height: 25px;
+
+    /* Header H4 */
+    font-family: 'Nunito Sans', system-ui;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 25px;
+    /* identical to box height */
+    display: flex;
+    align-items: center;
+}
+
+.optionButtons{
+    /* Increment */
+    border: none;
+    width: 32px;
+    height: 32px;
+    font-size: x-large;
+    /* Vector */
+
+    /* Purple Blue */
+    color: #605DEC;
+
+    /* Grey / 100
+    Provides a near-white grey that can be used to contrast against pure white.
+    */
+    background: #FAFAFA;
+    border-radius: 4px;
+
+    /* Inside auto layout */
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+
+.links{
+    margin-top: 60px;
+    display: flex;
+    gap: 20px;
+    flex-direction: row;
+}
+
+.save{
+    /* button */
+
+    box-sizing: border-box;
+    text-decoration: none;
+    /* Auto layout */
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 12px 20px;
+    gap: 8px;
+
+    width: 161px;
+    height: 48px;
+
+    /* Purple Blue */
+    border: 1px solid #605DEC;
+    border-radius: 4px;
+}
+.save p{
+    /* label */
+    display: inline;
+    width: 121px;
+    height: 25px;
+
+    /* Body Large */
+    font-family: 'Nunito Sans', system-ui;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 18px;
+    line-height: 25px;
+    /* identical to box height */
+    align-items: center;
+
+    /* Purple Blue */
+    color: #605DEC;
+}
+
+.done, .confirmDone{
+    /* button */
+
+    box-sizing: border-box;
+    text-decoration: none;
+    /* Auto layout */
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 12px 20px;
+    gap: 8px;
+
+    width: 138px;
+    height: 48px;
+
+    border-radius: 4px;
+}
+
+.done{
+    background: rgba(203, 212, 230, 0.3);
+    /* Grey / 400 */
+    border: 1px solid #7C8DB0;
+    cursor: none;
+}
+
+.confirmDone, .confirm {
+    background: #605DEC;
+    border: none;
+    cursor: pointer;
+}
+
+.done p,.confirmDone p{
+    /* label */
+
+    width: 98px;
+    height: 25px;
+    /* Body Large */
+    font-family: 'Nunito Sans', system-ui;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 18px;
+    line-height: 25px;
+    /* identical to box height */
+    display: flex;
+    align-items: center;
+}
+.confirmDone p{
+    color: #FFFFFF;
+}
+
+.done p{
+    color: #7C8DB0;
+}
+
+.errorBorder {
+    border: 1px solid red;
+}
+
+.confirm:hover, .confirmDone:hover{
+    background: #FFFFFF;
+    border: 1px solid #605DEC;
+}
+
+.confirmDone p:hover, .confirm p:hover{
+    color: #605DEC;
+}

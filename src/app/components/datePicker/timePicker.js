@@ -175,7 +175,7 @@ const TimePicker = ({handleDate}) => {
                         }
                     </span>
                 </div>
-                <button onClick={()=> handleDate(from,to,(!isRoundTrip ? from? formatDate(from,"MMM dd")
+                <button onClick={()=> handleDate(from,to,isRoundTrip,(!isRoundTrip ? from? formatDate(from,"MMM dd")
                     : "Select Depart date" : !from ? "Depart to Return" :
                     `${formatDate(from,"MMM dd")}
                                 - ${to? formatDate(to,"MMM dd"): ""}`

@@ -12,6 +12,9 @@ import { usePathname } from "next/navigation";
 import SignUp from "@/app/components/sign-up/sign-up";
 import SignIn from "@/app/components/sign-in/sign-in";
 import profile from "@/assets/user.jpg";
+import cookies from "js-cookie";
+import { useSession } from "next-auth/react";
+
 
 function Header() {
     const [menuOpen, setMenuOpen] = useState(false);
@@ -20,18 +23,38 @@ function Header() {
     const [user, setUser] = useState(null);
     const [isPromotionVisible, setIsPromotionVisible] = useState(true);
     const [margin, setMargin] = useState('64px');
+    const handleProfile = () => {
+        cookies.remove('auth_session');
+        fetch('/api/user/logout', {
+            method: 'POST',
+        }).then((response) => {
+                setUser(null);
+                setIsPromotionVisible(true);
+                setMargin('64px');
+        }
 
+        )
+
+    }
     const path = usePathname();
+
+    const session = useSession();
+    useEffect(() =>{
+        if (session.status === "authenticated"){
+            console.log(session)
+            cookies.set('auth_session', session.data.user.id, { path: '/' });
+        }
+    },[])
 
     useEffect(() => {
         async function fetchUser() {
             try {
                 const response = await fetch('/api/auth/verify');
                 const data = await response.json();
-                setUser(data.user);
+                data && data.session && setUser(data.session.userId);
 
                 // Hide promotion banner if the user is logged in
-                if (data.user) {
+                if (data && data.session) {
                     setIsPromotionVisible(false);
                     setMargin('0px');
                 }
@@ -41,7 +64,7 @@ function Header() {
         }
 
         fetchUser();
-    }, []);
+    }, [signUp,signIn,isPromotionVisible]);
 
     const closeSignup = () => setSignUp(false);
     const closeSignin = () => setSignIn(false);
@@ -68,8 +91,6 @@ function Header() {
                 </div>
             )}
             <div className={classes.navbar} style={{marginTop: margin}}>
-
-
                 {/* Header */}
                 <header className={classes.header}>
                     <div>
@@ -79,7 +100,7 @@ function Header() {
                                 src={close}
                                 alt="Close menu"
                                 onClick={() => setMenuOpen(false)}
-                                style={{filter: 'invert(1)'}} // SVG color fix
+                                style={{filter: 'invert(1)', width:"16px"}} // SVG color fix
                             />
                         ) : (
                             <Image
@@ -91,7 +112,7 @@ function Header() {
                                     setSignUp(false);
                                     setSignIn(false);
                                 }}
-                                style={{filter: 'invert(1)'}} // SVG color fix
+                                // style={{filter: 'invert(1)'}} // SVG color fix
                             />
                         )}
                         <Link href="/" className={classes.logo}>
@@ -106,11 +127,14 @@ function Header() {
                             <Link className={path === '/packages' ? classes.active : classes.notActive}
                                   href="/packages">Packages</Link>
 
-                            {user ? (
+                            {path !== '/' ? (
                                 <div className={classes.user}>
-                                    <Image src={profile} alt="User" width={50}/>
+                                    <Image src={profile} alt="User" width={50} onClick={handleProfile} />
                                 </div>
-                            ) : (
+                            ) : user ? (<div className={classes.user}>
+                                <Image src={profile} alt="User" width={50} onClick={handleProfile}/>
+                            </div>)
+                            :(
                                 <>
                                     <button
                                         className={classes.signIn}

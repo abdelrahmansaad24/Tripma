@@ -1,25 +1,23 @@
 "use client";
 
-import departure from "@/assets/departure.png";
-import arrival from "@/assets/arrival.png";
+import departImage from "@/assets/departure.png";
+import arrivalImage from "@/assets/arrival.png";
 import calendar from "@/assets/calendar.png";
 import person from "@/assets/person.png";
-
-// import { parse } from 'date-fns';
-import { useState, useEffect, useRef } from "react";
-import {format, formatDate, parse} from "date-fns";
+import { toast } from 'react-hot-toast';
+import {useEffect, useRef, useState} from "react";
+import {format, parse} from "date-fns";
 import styles from "./search.module.css";
-import Link from "next/link";
 import Image from "next/image";
-import { useSearchParams } from "next/navigation";
+import {useRouter, useSearchParams} from "next/navigation";
 import TimePicker from "@/app/components/datePicker/timePicker";
 
+const suggestions = [
+    "LAX", "JFK", "ORD", "DXB", "LHR", "SFO", "NRT",
+    "CDG", "AMS", "SIN", "PEK", "SYD", "HND", "FRA",
+    "YYZ", "ATL", "ICN",
+];
 const useAutoSuggest = (initialValue = "") => {
-    const suggestions = [
-        "LAX", "JFK", "ORD", "DXB", "LHR", "SFO", "NRT",
-        "CDG", "AMS", "SIN", "PEK", "SYD", "HND", "FRA",
-        "YYZ", "ATL", "ICN",
-    ];
 
     const [input, setInput] = useState(initialValue);
     const [matchingSuggestions, setMatchingSuggestions] = useState([]);
@@ -50,32 +48,32 @@ const useAutoSuggest = (initialValue = "") => {
     };
 };
 
-const Search =  () => {
-    const query = useSearchParams();
+const Search = ({startDate,endDate,adults,minors,date,departure,arrival, roundTrip }) => {
+    const router = useRouter();
 
-    const initialStartDate = query.get("startDate")
-        ? parse(query.get("startDate"),"dd/MM/yyyy",new Date())
+    const initialStartDate = startDate
+        ? parse(startDate, "dd/MM/yyyy", new Date())
         : null;
 
-    const initialEndDate = query.get("endDate")
-        ? parse(query.get("endDate"), "dd/MM/yyyy", new Date())
+    const initialEndDate = endDate
+        ? parse(endDate, "dd/MM/yyyy", new Date())
         : null;
 
-    console.log(initialStartDate)
     const [state, setState] = useState({
-        departure: query.get("departure") || "",
-        arrival: query.get("arrival") || "",
+        departure: departure || "",
+        arrival: arrival || "",
         startDate: initialStartDate instanceof Date && !isNaN(initialStartDate)
             ? format(initialStartDate, "dd/MM/yyyy")
             : null,
         endDate: initialEndDate instanceof Date && !isNaN(initialEndDate)
             ? format(initialEndDate, "dd/MM/yyyy")
             : null,
-        adults: parseInt(query.get("adults")) || 1,
-        minors: parseInt(query.get("minors")) || 0,
+        adults: parseInt(adults) || 1,
+        minors: parseInt(minors) || 0,
         openDate: false,
         openOptions: false,
-        date: query.get('date')? query.get('date') : "Depart to Return",
+        roundTrip: roundTrip === null,
+        date: date ? date : "Depart to Return",
     });
 
     const departureSuggest = useAutoSuggest(state.departure);
@@ -112,28 +110,51 @@ const Search =  () => {
             adults: state.adults,
             minors: state.minors,
             date: state.date,
+            roundTrip: state.roundTrip,
         };
-
+        // alert(state.date)
         return Object.entries(queryParams)
             .filter(([_, value]) => value) // Remove empty/undefined values
-            .map(([key, value]) => `${key}=${encodeURIComponent(value)}`)
-            .join("&");
+            .map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join("&");
     };
-    const handleDate = (startDate, endDate, date) => {
+
+    const handleDate = (startDate, endDate, roundTrip,date) => {
         setState((prev) => ({
             ...prev,
             startDate: startDate && format(startDate, "dd/MM/yyyy"),
             endDate: endDate && format(endDate, "dd/MM/yyyy"),
+            roundTrip: roundTrip,
             date: date,
         }));
         closeSelectors();
+    };
+
+    const handleSearch = () => {
+        // href={}
+        if(!suggestions.includes(departureSuggest.input)){
+            toast.error("Please choose a valid departure airport");
+            return;
+        }
+        if(!suggestions.includes(arrivalSuggest .input)){
+            toast.error("Please choose a valid arrival airport");
+            return;
+        }
+        if (!state.startDate){
+            toast.error("Please choose a valid departure date");
+            return;
+        }
+        if (state.roundTrip && !state.endDate){
+            toast.error("Please choose a valid arrival date or switch to single trip");
+            return;
+        }
+        router.push(`/explore?${buildQuery()}`);
     }
+
     return (
         <div className={styles.search} ref={searchRef}>
             <div className={styles.buttons}>
-                {/* Departure Input */}
                 <div className={styles.placeInput}>
-                    <Image src={departure} alt="Departure"/>
+                    <Image src={departImage} alt="Departure" />
                     <input
                         type="text"
                         placeholder="From where?"
@@ -142,7 +163,11 @@ const Search =  () => {
                         onFocus={() => {
                             departureSuggest.setIsOpen(true);
                             arrivalSuggest.setIsOpen(false);
-                            setState((prev) => ({...prev, openDate: false, openOptions: false}));
+                            setState((prev) => ({
+                                ...prev,
+                                openDate: false,
+                                openOptions: false,
+                            }));
                         }}
                         className={styles.textInput}
                     />
@@ -151,7 +176,9 @@ const Search =  () => {
                             {departureSuggest.matchingSuggestions.map((suggestion) => (
                                 <li
                                     key={suggestion}
-                                    onClick={() => departureSuggest.handleSuggestionClick(suggestion)}
+                                    onClick={() =>
+                                        departureSuggest.handleSuggestionClick(suggestion)
+                                    }
                                     className={styles.textButton}
                                 >
                                     {suggestion}
@@ -161,9 +188,8 @@ const Search =  () => {
                     )}
                 </div>
 
-                {/* Arrival Input */}
                 <div className={styles.placeInput}>
-                    <Image src={arrival} alt="Arrival"/>
+                    <Image src={arrivalImage} alt="Arrival" />
                     <input
                         type="text"
                         placeholder="Where to?"
@@ -172,7 +198,11 @@ const Search =  () => {
                         onFocus={() => {
                             arrivalSuggest.setIsOpen(true);
                             departureSuggest.setIsOpen(false);
-                            setState((prev) => ({...prev, openDate: false, openOptions: false}));
+                            setState((prev) => ({
+                                ...prev,
+                                openDate: false,
+                                openOptions: false,
+                            }));
                         }}
                         className={styles.textInput}
                     />
@@ -181,7 +211,9 @@ const Search =  () => {
                             {arrivalSuggest.matchingSuggestions.map((suggestion) => (
                                 <li
                                     key={suggestion}
-                                    onClick={() => arrivalSuggest.handleSuggestionClick(suggestion)}
+                                    onClick={() =>
+                                        arrivalSuggest.handleSuggestionClick(suggestion)
+                                    }
                                     className={styles.textButton}
                                 >
                                     {suggestion}
@@ -191,9 +223,8 @@ const Search =  () => {
                     )}
                 </div>
 
-                {/* Date Picker */}
                 <div className={styles.date}>
-                    <Image src={calendar} alt="Calendar"/>
+                    <Image src={calendar} alt="Calendar" />
                     <span
                         className={styles.dateInput}
                         onClick={() => {
@@ -210,14 +241,13 @@ const Search =  () => {
                     </span>
                     {state.openDate && (
                         <div className={styles.absolute}>
-                            <TimePicker handleDate={handleDate}/>
+                            <TimePicker handleDate={handleDate} />
                         </div>
                     )}
                 </div>
 
-                {/* Person Picker */}
                 <div className={styles.person}>
-                    <Image src={person} alt="Person"/>
+                    <Image src={person} alt="Person" />
                     <span
                         className={styles.personInput}
                         onClick={() => {
@@ -293,14 +323,18 @@ const Search =  () => {
                         </div>
                     )}
                 </div>
+                <button onClick={handleSearch} className={styles.searchButton}>
+                    <p>Search</p>
+                </button>
 
-                {/* Search Button */}
-                <Link href={`/explore?${buildQuery()}`} className={styles.fullWidth}>
-                    <button className={styles.searchButton}>Search</button>
-                </Link>
+
+                {/*<Link href={`/explore?${buildQuery()}`} className={styles.fullWidth}>*/}
+                {/*    <button className={styles.searchButton}>Search</button>*/}
+                {/*</Link>*/}
             </div>
         </div>
     );
 };
 
 export default Search;
+

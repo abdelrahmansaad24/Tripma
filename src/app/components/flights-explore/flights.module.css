@@ -34,8 +34,9 @@
 }
 
 .flights {
-    width: 100%;
+    width: 872px;
     height: 100%;
+
     display: flex;
     flex-direction: column;
     gap: 1.25rem; /* Assuming a base spacing scale where 1 unit = 0.25rem */
@@ -75,7 +76,34 @@
     }
 }
 .map {
+    display: flex;
+    position: relative;
     width: 100%;
+    height: 171px;
+}
+
+.map img{
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.map div{
+    position: absolute;
+    top: 60%;
+    left: 0;
+    width: 100%;
+}
+
+.map p{
+    position: absolute;
+    padding: 0;
+    margin: 0;
+    font-size: 12px;
+    font-weight: bold;
+    display: inline;
+    color: darkblue;
+    z-index: 10;
 }
 /* Media query for large screens */
 @media (min-width: 1024px) {

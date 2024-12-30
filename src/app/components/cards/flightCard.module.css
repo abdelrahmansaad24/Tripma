@@ -1,0 +1,63 @@
+.card {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1.75rem; /* Assuming a base spacing scale where 1 unit = 0.25rem */
+    /*padding: 1rem; !* Assuming 1rem = 16px, this is equivalent to p-4 *!*/
+    margin: 10px 20px;
+}
+
+.h2 {
+    color: #27273F;
+    font-weight: 400; /* Equivalent to font-normal */
+    font-size: 0.75rem; /* Assuming 1rem = 16px, this is equivalent to text-xs */
+    margin: 5px 0;
+}
+
+.p{
+    color: #7C8DB0;
+    font-weight: 400; /* Equivalent to font-normal */
+    font-size: 0.75rem; /* Assuming 1rem = 16px, this is equivalent to text-xs */
+    margin: 5px 0;
+}
+.tail {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    /*margin-right: 20px;*/
+    padding-right: 30px;
+
+}
+.start {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+.size {
+    width: 1.5rem; /* Assuming 1rem = 16px, this is equivalent to w-6 */
+    height: 1.5rem; /* Equivalent to h-6 */
+    object-fit: contain;
+}
+
+.gap {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem; /* Assuming a base spacing scale where 1 unit = 0.25rem */
+}
+
+/* Media query for medium screens */
+@media (min-width: 768px) {
+    .h2 {
+        font-size: 1rem; /* Equivalent to text-base */
+    }
+    .tail {
+        align-items: flex-end;
+    }
+    .size {
+        width: 2.25rem; /* Equivalent to w-9 */
+        height: 2.25rem; /* Equivalent to h-9 */
+    }
+}

@@ -11,5 +11,8 @@ export function verifyPassword(storedPassword, suppliedPassword) {
   const [hashedPassword, salt] = storedPassword.split(':');
   const hashedPasswordBuf = Buffer.from(hashedPassword, 'hex');
   const suppliedPasswordBuf = crypto.scryptSync(suppliedPassword, salt, 64);
+  console.log(hashedPasswordBuf);
+  console.log(suppliedPasswordBuf);
+  console.log(crypto.timingSafeEqual(hashedPasswordBuf, suppliedPasswordBuf));
   return crypto.timingSafeEqual(hashedPasswordBuf, suppliedPasswordBuf);
 }

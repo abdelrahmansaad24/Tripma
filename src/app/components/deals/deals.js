@@ -1,39 +1,35 @@
-"use client";
-
 import Card from "@/app/components/cards/card";
 import Link from "next/link";
 import Image from "next/image";
 import styles from "./deals.module.css";
-import { useEffect, useState } from "react";
 
-function Deals({ length = 3, color = "#605DEC",type = 'packages' }) {
-    const [packages, setPackages] = useState([]);
-
-    useEffect(() => {
-        async function fetchPackages() {
-            try {
-                // Fetch from the backend API
-                const response = type === 'packages' ? await fetch(`/api/package?limit=${length}`) : await fetch(`/api/hotels?limit=${length}`);
-                const json = await response.json();
-
-                if (json.success) {
-                    setPackages(json.result);
-                } else {
-                    console.error("Failed to fetch packages:", json.error);
-                }
-            } catch (error) {
-                console.error("Error fetching packages:", error);
-            }
+async function fetchData(type, length) {
+    const url = type === "packages"? `/api/package?limit=${length}` : `/api/hotels?limit=${length}`;
+    try {
+        // Fetch from the backend API
+        const response = await fetch('http://localhost:3000/' + url, { cache: 'no-store' }); // Ensure data is not cached
+        const json = await response.json();
+        if (json.success) {
+            return json.result;
+        } else {
+            console.error("Failed to fetch packages:", json.error);
+            return [];
         }
+    } catch (error) {
+        console.error("Error fetching packages:", error);
+        return [];
+    }
+}
 
-        fetchPackages();
-    }, [length]);
+async function Deals({ length = 3, color = "#605DEC",type = 'packages', title1 = 'Find your next adventure with these'
+                         , title2 ='flight deals',title3 }) {
+    const packages = await fetchData(type, length)
 
     return (
         <div className={styles.packageDeals}>
             <div className={styles.head}>
                 <p className={styles.headText}>
-                    Find your next adventure with these <span style={{ color: color }}>flight deals</span>
+                    {title1} <span style={{ color: color }}>{title2}</span> {title3}
                 </p>
                 <Link className={styles.to} href={`/${type}`}>
                     <p className={styles.toText}>All &#8594;</p>

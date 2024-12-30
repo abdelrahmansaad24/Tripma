@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useState } from 'react';
 import Image from "next/image";
 import close from '@/assets/cross-close-svgrepo-com.svg';
@@ -5,8 +7,10 @@ import googleIcon from "@/assets/google-icon.svg";
 import appleIcon from "@/assets/apple-icon.svg";
 import facebookIcon from "@/assets/facebook-icon.svg";
 import separator from "@/assets/sperator.svg";
-import { signup } from "@/actions/auth-actions";
+import { signin } from "@/actions/auth-actions";
 import classes from "./sign-in.module.css";
+import {toast} from "react-hot-toast";
+import {signIn} from "next-auth/react";
 
 function SignIn({ exit }) {
     const [formData, setFormData] = useState({
@@ -15,8 +19,8 @@ function SignIn({ exit }) {
         rememberMe: false,
     });
 
-    const [isLoading, setIsLoading] = useState(false); // For loading indicator
-    const [errors, setErrors] = useState(null); // To store any validation or signup errors
+    const [isLoading, setIsLoading] = useState(false);
+    const [errors, setErrors] = useState(null);
 
     const handleChange = (e) => {
         const { name, value, type, checked } = e.target;
@@ -31,26 +35,36 @@ function SignIn({ exit }) {
         setIsLoading(true);
         setErrors(null);
 
-        const response = await signup(null, new FormData(e.target));
-        console.log(response)
-        if (response.errors) {
-            setErrors(response.errors);
-        } else if (response.success) {
-            exit(); // Close the modal after successful signup
-        }
+        try {
+            console.log(e.target);
+            const response = await signin(null, new FormData(e.target));
+            console.log(response);
 
-        setIsLoading(false);
+            if (response.error) {
+                toast.error("Invalid email or password");
+                setErrors("Invalid email or password");
+            } else if (response.success) {
+                exit(); // Close the modal after successful signin
+            }
+        } catch (error) {
+            setErrors({ general: "An unexpected error occurred." });
+            // toast.error(errors);
+
+            console.error(error);
+        } finally {
+            setIsLoading(false);
+        }
     };
 
     return (
         <div className={classes.box}>
             <div className={classes.header}>
                 <div className={classes.title}>
-                    <h1 className={classes.h1}>Welcome back in Tripma</h1>
+                    <h1 className={classes.h1}>Welcome back to Tripma</h1>
                     <Image
                         style={{ cursor: 'pointer' }}
                         src={close}
-                        alt="X"
+                        alt="Close"
                         onClick={exit}
                     />
                 </div>
@@ -86,35 +100,36 @@ function SignIn({ exit }) {
                         <input
                             className={classes.check}
                             type="checkbox"
-                            name="remember me"
+                            name="rememberMe"
                             checked={formData.rememberMe}
                             onChange={handleChange}
-                            required
                         />
-                        keep me signed in
+                        Keep me signed in
                     </label>
                 </div>
                 <button
                     className={classes.submit}
                     type="submit"
                     disabled={isLoading}
-                    style={{ backgroundColor: isLoading ? '#ccc' : '' }}
+                    style={{ backgroundColor: isLoading ? '#ccc' : undefined }}
                 >
                     <span className={classes.submitText}>
-                        {isLoading ? 'Loading...' : 'Create account'}
+                        {isLoading ? 'Loading...' : 'Sign In'}
                     </span>
                 </button>
             </form>
             {errors && (
                 <p style={{ color: "red", margin: '0', padding: '0' }}>
-                    {Object.values(errors).map((e) => e + ' ')}
+                    {errors}
                 </p>
             )}
             <div className={classes.separator}>
                 <Image src={separator} alt="OR" />
             </div>
             <div className={classes.buttonsContainer}>
-                <button className={classes.socialButton}>
+                <button className={classes.socialButton} onClick={() =>
+                    signIn("google")
+                }>
                     <Image src={googleIcon} alt="Google icon" width={20} height={20} />
                     <span>Continue with Google</span>
                 </button>
@@ -122,7 +137,9 @@ function SignIn({ exit }) {
                     <Image src={appleIcon} alt="Apple icon" width={20} height={20} />
                     <span>Continue with Apple</span>
                 </button>
-                <button className={classes.socialButton}>
+                <button className={classes.socialButton} onClick={() =>
+                    signIn("facebook")
+                }>
                     <Image src={facebookIcon} alt="Facebook icon" width={20} height={20} />
                     <span>Continue with Facebook</span>
                 </button>

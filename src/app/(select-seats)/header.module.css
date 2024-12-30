@@ -1,0 +1,99 @@
+.navbar {
+    width: 50%;
+    padding: 0;
+    right: 0;
+    height: 96px;
+    z-index: 99;
+    /*margin-bottom: 64px;*/
+}
+.header{
+    position: fixed;
+    left: 0;
+    top: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 24px;
+    gap: 10px;
+    height: 96px;
+}
+
+.logo{
+    cursor: pointer;
+    border: none;
+}
+.logo:focus,
+.logo:active{
+    border: none;
+}
+
+.menu{
+    cursor: pointer;
+    padding: 12px 0;
+    display: none;
+    width: 32px;
+    height: 32px;
+}
+
+.buttons{
+    padding:16px;
+    gap: 16px;
+    display: flex;
+}
+
+.routs{
+    padding:16px 0;
+    gap: 16px;
+    display: flex;
+    margin: 0;
+}
+
+.notActive{
+    /* Grey / 400 */
+    display: flex;
+    align-items: center;
+    color: #7C8DB0;
+}
+
+
+.notActive:hover{
+    color: #605DEC;
+}
+
+.dropMenu{
+    gap: 16px;
+    display: flex;
+    z-index: 99;
+    justify-content: space-between;
+
+    padding: 0 40px 0 24px;
+}
+
+.dropMenu a{
+    text-decoration: none;
+}
+
+.close{
+    /* 32 / x close no */
+
+    margin: 20px;
+
+    width: 12px;
+    height: 12px;
+
+}
+
+
+/* When the width is 800px or larger, show .show-on-large and hide .show-on-small */
+@media screen and (min-width: 100px) {
+    .buttons .routs a, .signIn{
+        display: none;
+    }
+    .menu{
+        display: inline-block;
+    }
+    .navbar{
+        height: 80px;
+    }
+}

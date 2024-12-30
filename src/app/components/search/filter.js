@@ -1,3 +1,4 @@
+
 import React from 'react';
 import styles from "@/app/components/flights-explore/flights.module.css";
 
@@ -11,9 +12,10 @@ const Filter = ({state, handleSelectChange}) => {
                 className={styles.button}
             >
                 <option value="">Max price</option>
-                <option value="$100-300">$100-300</option>
-                <option value="$300-600">$300-600</option>
-                <option value="$600-1000">$600-1000</option>
+                <option value="600">$600</option>
+                <option value="800">$800</option>
+                <option value="1000">$1000</option>
+                <option value="1200">$1200</option>
             </select>
             <select
                 name="shop"
@@ -30,9 +32,9 @@ const Filter = ({state, handleSelectChange}) => {
                 className={styles.button}
             >
                 <option value="">Times</option>
-                <option value="7 AM - 4 PM">7 AM - 4 PM</option>
-                <option value="8 AM - 12 PM">8 AM - 12 PM</option>
-                <option value="6 PM - 10 PM">6 PM - 10 PM</option>
+                <option value="04:00 AM - 12:00 PM">4 AM - 12 PM</option>
+                <option value="12:00 PM - 08:00 PM">12 PM - 8 PM</option>
+                <option value="08:00 PM - 04:00 AM">8 PM - 4 AM</option>
             </select>
             <select
                 name="airline"
@@ -41,9 +43,12 @@ const Filter = ({state, handleSelectChange}) => {
                 className={styles.button}
             >
                 <option value="">Airlines</option>
-                <option value="Japan">Japan</option>
-                <option value="Hawai">Hawai</option>
-                <option value="Dubai">Dubai</option>
+                <option value="japan">Japan</option>
+                <option value="hawaiian">Hawaiian</option>
+                <option value="delta">Delta</option>
+                <option value="united">United</option>
+                <option value="qantas">Qantas</option>
+                <option value="france">France</option>
             </select>
             <select
                 name="flightClass"

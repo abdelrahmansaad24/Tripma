@@ -1,0 +1,384 @@
+.plane{
+    /*position: relative;*/
+    width: 100%;
+    height: 100vh;
+}
+.container{
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 10;
+    background-color: rgb(219, 219, 227, 0.4);
+}
+.notify{
+    /* Modal Dialog */
+
+    box-sizing: border-box;
+
+    /* Auto layout */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    padding: 40px;
+    /*gap: 12px;*/
+
+    position: fixed;
+    width: 548px;
+    height: 267px;
+    left: calc(50% - 274px);
+    top: calc(50% - 140px);
+
+    /* True White */
+    background: #FFFFFF;
+    /* Grey / 200
+
+    Used for outlines or inactive buttons
+
+    */
+    border: 1px solid #CBD4E6;
+    /* elevation / medium */
+    box-shadow: 0 2px 4px rgba(7, 4, 146, 0.1), 0 24px 60px rgba(6, 47, 125, 0.05), 0 12px 24px rgba(27, 59, 119, 0.05);
+    border-radius: 12px;
+
+}
+
+.notify h1{
+    /* Title row */
+
+    /* Auto layout */
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 0;
+    margin: 0;
+
+    width: 468px;
+    height: 32px;
+    /* Header H3 */
+    font-family: 'Nunito Sans', system-ui;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 22px;
+    line-height: 33px;
+
+    /* Grey / 600 */
+    color: #6E7491;
+
+
+}
+
+.notify p{
+    /* description */
+
+    width: 468px;
+    height: 75px;
+
+    /* Body Large */
+    font-family: 'Nunito Sans', system-ui;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 18px;
+    line-height: 25px;
+
+    /* Grey / 400 */
+    color: #7C8DB0;
+}
+
+.notify .action{
+    /* Actions */
+
+    /* Auto layout */
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 8px 0 0;
+    gap: 10px;
+
+    width: 468px;
+    height: 56px;
+
+}
+
+.notify .action .cancel{
+    /* button */
+    cursor: pointer;
+    box-sizing: border-box;
+
+    /* Auto layout */
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 12px 20px;
+    gap: 8px;
+
+    width: 95px;
+    height: 48px;
+
+    /* Purple Blue */
+    border: 1px solid #605DEC;
+    border-radius: 4px;
+
+    /* Body Large */
+    font-family: 'Nunito Sans', system-ui;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 18px;
+    line-height: 25px;
+    /* identical to box height */
+    /* Purple Blue */
+    color: #605DEC;
+
+    justify-content: center;
+}
+
+.notify .action .confirm{
+    /* button */
+    cursor: pointer;
+
+    /* Auto layout */
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+
+    width: 185px;
+    height: 48px;
+
+    /* Purple Blue */
+    background: #605DEC;
+    border-radius: 4px;
+
+    /* Body Large */
+    font-family: 'Nunito Sans', system-ui;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 18px;
+    line-height: 25px;
+    /* identical to box height */
+    /* Grey / 100 */
+    color: #FAFAFA;
+    justify-content: center;
+
+
+}
+
+.notify .action .confirm:hover{
+    color: #605DEC;
+    background: #FAFAFA;
+    border: 1px solid #605DEC;
+}
+
+
+
+.notify .action .cancel:hover{
+    background: #605DEC;
+    color: #FAFAFA;
+}
+
+.plane img{
+    /*position: absolute;*/
+    /*left: 0;*/
+    /*top: 0;*/
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+.vip{
+    /* business */
+
+    /* Auto layout */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 12px 0;
+    gap: 12px;
+    width: 200px;
+    height: fit-content;
+    /* True White */
+    background: #FFFFFF;
+    border-radius: 8px;
+    margin-bottom: 30px;
+}
+
+.vip .row{
+
+    /* Auto layout */
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+
+    width: 190px;
+    height: 48px;
+    padding: 0 4px;
+    /* True White */
+    background: #FFFFFF;
+    /*background: black;*/
+}
+
+.grayBackground{
+    /* business */
+
+    /* Auto layout */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: -9.3px;
+    width: 217px;
+    /*height: 400px;*/
+    min-height: 400px;
+    height: fit-content;
+    /* True White */
+    background: #e9eafd;
+    border: 0.5px solid #b7bcdf;
+    border-top: none;
+    z-index: 100;
+    border-radius: 40px;
+}
+
+.cell{
+    /* seat */
+
+    margin: 0 auto;
+    width: 30px;
+    height: 40px;
+
+    border-radius: 4px;
+}
+
+.rowNumber{
+    /* row number */
+
+    margin: 0;
+    width: 30px;
+    height: 32px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.rowNumber p{
+    font-family: 'Nunito Sans', system-ui;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 19px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+
+    /* Grey / 400 */
+    color: #7C8DB0;
+}
+
+.economy{
+    /* Auto layout */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 8px 0;
+    gap: 4px;
+
+    position: absolute;
+    width: 200px;
+    height: fit-content;
+    /* True White */
+    background: #FFFFFF;
+    border-radius: 8px;
+}
+.economy .exit{
+    /* seat row / exit row */
+
+    width: 200px;
+    height: 18px;
+    display: flex;
+    align-items: center;
+    /* True White */
+    background: #FFFFFF;
+
+    align-self: stretch;
+}
+
+.exit p{
+    /* Exit row */
+
+    position: absolute;
+    width: 46px;
+    height: 16px;
+    left: 25px;
+
+    font-family: 'Nunito Sans', system-ui;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 16px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+
+    /* Grey / 400 */
+    color: #7C8DB0;
+}
+
+.economy .row{
+    /* seat row / economy */
+
+    /* Auto layout */
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 4px;
+    gap: 5px;
+
+    width: 192px;
+    height: 32px;
+
+    /* True White */
+    background: #FFFFFF;
+
+    /* Inside auto layout */
+    flex: none;
+    order: 1;
+    align-self: stretch;
+    flex-grow: 0;
+}
+
+.economy .row .seat{
+    /* seat */
+    width: 22px;
+    height: 32px;
+
+    /* Inside auto layout */
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+    border-radius: 4px;
+}
+
+.content{
+    position: fixed;
+    right: 0;
+    top: 0;
+    /* Auto layout */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0;
+    background-color: black;
+    width: 50%;
+    height: 100%;
+
+
+    /* Inside auto layout */
+    flex: none;
+    order: 1;
+    align-self: stretch;
+    flex-grow: 0;
+}

@@ -1,3 +1,5 @@
+"use client"
+
 import React, { useState } from 'react';
 import Image from "next/image";
 import close from '@/assets/cross-close-svgrepo-com.svg';
@@ -7,7 +9,7 @@ import facebookIcon from "@/assets/facebook-icon.svg";
 import separator from "@/assets/sperator.svg";
 import { signup } from "@/actions/auth-actions";
 import classes from "./sign-up.module.css";
-
+import { signIn } from "next-auth/react";
 function SignUp({ exit }) {
     const [formData, setFormData] = useState({
         emailOrPhone: '',
@@ -125,7 +127,9 @@ function SignUp({ exit }) {
                 <Image src={separator} alt="OR" />
             </div>
             <div className={classes.buttonsContainer}>
-                <button className={classes.socialButton}>
+                <button className={classes.socialButton} onClick={() =>
+                    signIn("google")
+                }>
                     <Image src={googleIcon} alt="Google icon" width={20} height={20} />
                     <span>Continue with Google</span>
                 </button>
@@ -133,7 +137,9 @@ function SignUp({ exit }) {
                     <Image src={appleIcon} alt="Apple icon" width={20} height={20} />
                     <span>Continue with Apple</span>
                 </button>
-                <button className={classes.socialButton}>
+                <button className={classes.socialButton} onClick={() =>
+                    signIn("facebook")
+                }>
                     <Image src={facebookIcon} alt="Facebook icon" width={20} height={20} />
                     <span>Continue with Facebook</span>
                 </button>

@@ -1,12 +1,6 @@
-import "./globals.css";
-import Header from "@/app/components/header/header";
-import Footer from "@/app/components/footer/footer";
-import CookieConsent from "@/app/cookieNotificatio/notification";
-import classes from "@/app/components/header/header.module.css";
+// import "./globals.css";
 import React from "react";
-import styles from "@/app/cookieNotificatio/cookieContest.module.css";
-import close from "@/assets/cross-close-svgrepo-com.svg";
-import Image from "next/image";
+import {Toaster} from "react-hot-toast";
 
 export const metadata = {
     title: "Tripma",
@@ -18,13 +12,10 @@ export default function RootLayout({ children }) {
         <html lang="en">
 
         <body>
-            <Header/>
-            <main className={'main'}>
-                {children}
-            </main>
-            <Footer/>
-            <CookieConsent/>
-
+        <main >
+            <Toaster position="bottom-center" />
+            {children}
+        </main>
         </body>
         </html>
     );

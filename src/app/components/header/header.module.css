@@ -191,9 +191,12 @@
     .menu{
         display: inline-block;
     }
-    /*.promotion{*/
-    /*    display: none;*/
-    /*}*/
+    .promotion{
+        height: 80px;
+    }
+    .navbar{
+        height: 80px;
+    }
 }
 
 /* When the width is 800px or larger, show .show-on-large and hide .show-on-small */

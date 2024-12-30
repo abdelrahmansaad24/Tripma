@@ -76,10 +76,10 @@
     max-height: 200px;
     height: fit-content;
     border-radius: 0.25rem;
-    overflow: scroll;
+    /*overflow: scroll;*/
     display: flex;
     flex-direction: column;
-    top: 30px;
+    top: 20px;
     left: 0;
     background-color: #FFFFFF;
     z-index: 1;
@@ -184,7 +184,7 @@
     display: flex;
     flex-direction: row;
     align-items: flex-start;
-    padding: 0px;
+    padding: 0;
     gap: 8px;
 
     width: 112px;
@@ -356,6 +356,6 @@
         height: 100%;
     }
     .drop, .optionsMenu{
-        top: 60px;
+        top: 45px;
     }
 }
