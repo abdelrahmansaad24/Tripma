@@ -106,7 +106,7 @@ const TimePicker = ({handleDate}) => {
 
     const handleDateSelect = (day, monthIndex) => {
         if (!day || !day[0]) return;
-        const year = monthIndex === 0 ? currentYear+1 : currentYear;
+        const year = monthIndex === 0 ? currentYear : currentYear;
         const selectedMonth = months[monthIndex % 12];
         if(!isRoundTrip) {
             setFrom(`${day}-${selectedMonth}-${year}`);
@@ -130,7 +130,7 @@ const TimePicker = ({handleDate}) => {
         {
             monthIndex: (startMonthIndex + 1) % 12,
             days: generateDays(
-                (startMonthIndex + 1) === 12 ? currentYear + 1 : currentYear,
+                (startMonthIndex + 1) === 12 ? currentYear : currentYear,
                 (startMonthIndex + 1) % 12
             ),
         }
@@ -190,7 +190,7 @@ const TimePicker = ({handleDate}) => {
                     {calendarMonths.map((calendar, idx) => (
                         <div key={idx} className={styles.month}>
                             <h6 className={styles.title}>
-                                {months[calendar.monthIndex]} {calendar.monthIndex === 0? currentYear +1 : currentYear}
+                                {months[calendar.monthIndex]} {calendar.monthIndex === 0? currentYear : currentYear}
                             </h6>
                             <div className={styles.calendarGrid}>
                                 <div className={styles.days}>
