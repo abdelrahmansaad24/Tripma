@@ -4,7 +4,7 @@ import styles from "./page.module.css";
 async function fetchHotels() {
     try {
         // Fetch from the backend API
-        const response = await fetch('http://localhost:3000/api/hotels', { cache: 'no-store' }); // Ensure data is not cached
+        const response = await fetch('https://tripma-eight.vercel.app/api/hotels', { cache: 'no-store' }); // Ensure data is not cached
         const json = await response.json();
         if (json.success) {
             return json.result;

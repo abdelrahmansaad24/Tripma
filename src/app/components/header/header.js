@@ -25,7 +25,7 @@ function Header() {
     const [margin, setMargin] = useState('64px');
     const handleProfile = () => {
         cookies.remove('auth_session');
-        fetch('/api/user/logout', {
+        fetch('https://tripma-eight.vercel.app/api/user/logout', {
             method: 'POST',
         }).then((response) => {
                 setUser(null);
@@ -40,7 +40,7 @@ function Header() {
 
     const session = useSession();
     useEffect(() =>{
-        if (session.status === "authenticated"){
+        if (session.status === "authenticated" && session.data && session.data.user && session.data.user.id){
             console.log(session)
             cookies.set('auth_session', session.data.user.id, { path: '/' });
         }
@@ -49,7 +49,7 @@ function Header() {
     useEffect(() => {
         async function fetchUser() {
             try {
-                const response = await fetch('/api/auth/verify');
+                const response = await fetch('https://tripma-eight.vercel.app/api/auth/verify');
                 const data = await response.json();
                 data && data.session && setUser(data.session.userId);
 

@@ -25,7 +25,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
             // console.log('User signed in:', user);
             // Send POST request to localhost:3000/api/auth/sign
             try {
-                const response = await fetch('http://localhost:3000/api/user/sign', {
+                const response = await fetch('https://tripma-eight.vercel.app/api/user/sign', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',

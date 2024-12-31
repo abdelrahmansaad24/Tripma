@@ -10,6 +10,7 @@ import FlightCard from "@/app/components/cards/flightCard";
 import FlightPrice from "@/app/components/flight-price/flightPrice";
 import map from "@/assets/Map.png"
 import Image from "next/image"
+import flight from "@/app/lib/models/flight";
 
 const Flights = ({startDate,endDate,departure,arrival,adults,minors,roundTrip}) => {
 
@@ -89,7 +90,7 @@ const Flights = ({startDate,endDate,departure,arrival,adults,minors,roundTrip}) 
             // };
             try {
                 console.log(queryObject);
-                const response = await fetch(`/api/flights?${buildQuery(queryObject)}`);
+                const response = await fetch(`https://tripma-eight.vercel.app/api/flights?${buildQuery(queryObject)}`);
                 const data = await response.json();
                 setAllFlights(data.result || []);
             } catch (error) {
@@ -188,7 +189,7 @@ const Flights = ({startDate,endDate,departure,arrival,adults,minors,roundTrip}) 
                     </div>
                     <div
                         className={styles.results}>
-                        {
+                        {   flights.length !==0?
                             flights.map((flight, idx) => {
                                 return (
                                     <div key={idx} className={styles.card} onClick={() => handelSelectedFlights(flight)}>
@@ -205,7 +206,7 @@ const Flights = ({startDate,endDate,departure,arrival,adults,minors,roundTrip}) 
                                     </div>
                                 );
                             }
-                            )
+                            ):<p>No flights to show</p>
                         }
                     </div>
                     <div className={styles.map}>

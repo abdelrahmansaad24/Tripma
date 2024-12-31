@@ -9,7 +9,7 @@ import Notification from "@/app/(Home)/payment/confirm/[id]/notification";
 import React from "react";
 
 const Page = async ({params}) => {
-    const response = await fetch(`http://localhost:3000/api/user/reservations?id=${await params.id}`);
+    const response = await fetch(`https://tripma-eight.vercel.app/api/user/reservations?id=${await params.id}`);
     const data = await response.json();
 
     const {

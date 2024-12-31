@@ -6,7 +6,7 @@ import Review from "@/app/components/cards/review";
 async function fetchData() {
     try {
         // Fetch from the backend API
-        const response = await fetch('http://localhost:3000/api/reviews?limit=3', { cache: 'no-store' }); // Ensure data is not cached
+        const response = await fetch('https://tripma-eight.vercel.app/api/reviews?limit=3', { cache: 'no-store' }); // Ensure data is not cached
         const json = await response.json();
         if (json.success) {
             return json.result;

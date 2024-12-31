@@ -4,10 +4,10 @@ import Image from "next/image";
 import styles from "./deals.module.css";
 
 async function fetchData(type, length) {
-    const url = type === "packages"? `/api/package?limit=${length}` : `/api/hotels?limit=${length}`;
+    const url = type === "packages"? `api/package?limit=${length}` : `api/hotels?limit=${length}`;
     try {
         // Fetch from the backend API
-        const response = await fetch('http://localhost:3000/' + url, { cache: 'no-store' }); // Ensure data is not cached
+        const response = await fetch('https://tripma-eight.vercel.app/' + url, { cache: 'no-store' }); // Ensure data is not cached
         const json = await response.json();
         if (json.success) {
             return json.result;

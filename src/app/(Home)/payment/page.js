@@ -68,7 +68,7 @@ const Page = () => {
 
         try {
             // Call your API endpoint
-            const response = await fetch("/api/user/reserve", {
+            const response = await fetch("api/user/reserve", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -94,7 +94,8 @@ const Page = () => {
 
 
     const validateInputs = () => {
-        return ccv.trim() !== "" && number.trim() !== "" && date.trim() !== "" && name.trim() !== "";
+        const regex = /^(0[1-9]|1[0-2])\/\d{2}$/; // MM/YY format
+        return ccv.trim() !== "" && number.trim() !== "" && date.trim() !== "" && name.trim() !== "" && regex.test(date.trim());
     }
 
     useEffect(() => {
@@ -111,7 +112,7 @@ const Page = () => {
         }
         async function fetchUser() {
             try {
-                const response = await fetch('/api/auth/verify');
+                const response = await fetch('https://tripma-eight.vercel.app/api/auth/verify');
                 const data = await response.json();
                 data && data.session && setUser(data.session.userId);
 
@@ -214,6 +215,7 @@ const Page = () => {
                                 value={ccv}
                                 onChange={(e) => setCcv(e.target.value)}
                                 className={styles.input}
+                                max={9999}
                             />
                         </div>
                     </form>
