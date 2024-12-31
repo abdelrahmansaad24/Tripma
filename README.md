@@ -9,7 +9,7 @@ Tripma is a comprehensive travel booking system designed to manage users, flight
 
 An overview of the system's database structure:
 
-![ERD Diagram](./assets/diagram.svg)
+![ERD Diagram](./assets/diagram.png)
 
 ### Table Definitions
 ```plaintext
@@ -90,8 +90,4 @@ flights.return_trip_id > flights.id
 
 The API endpoints for the Tripma system are organized as follows:
 
-https://documenter.getpostman.com/view/40388911/2sAYHxmP3S
-
-## Deployment 
-
-[deploy](https://tripma-eight.vercel.app/)
+[API](https://app.swaggerhub.com/apis/ABDELRHMANIBRAHIMSAA/Tripma/1.0.0)
