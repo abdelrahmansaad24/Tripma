@@ -26,12 +26,16 @@ const EmergencyContact = mongoose.models?.EmergencyContact || mongoose.model('Em
 
 // Emergency Contact management class
 class EmergencyContactManager {
-    static async createContact(contactData) {
+    static async createContact(contactData, session = null) {
         await dbConnect(); // Ensure database connection
 
         try {
             const contact = new EmergencyContact(contactData);
-            await contact.save();
+            if (session) {
+                await contact.save({session:session}); // Save the payment with the session
+            } else {
+                await contact.save(); // Save without session for non-transactional use
+            }
             return { success: true, contact: contact };
         } catch (error) {
             console.error(error);

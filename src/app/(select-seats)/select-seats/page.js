@@ -326,7 +326,7 @@ const Page = () => {
             <div className={styles.content}>
                 <Content currentPassenger={currentPassenger} from={flight1.departure} to={flight1.arrival}
                          start={[flight1.startDate,flight1 && flight1.time && flight1.time.split(' - ') ]}
-                         end={[flight2.startDate,flight2 && flight2.time && flight2.time.split(' - ') ]}
+                         end={[flight2 && flight2.startDate,flight2 && flight2.time && flight2.time.split(' - ') ]}
                          flightNo={flightsNo} handleNext={handleNext} done={selected.length === passengers.length}/>
             </div>
         </>

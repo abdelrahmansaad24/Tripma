@@ -18,7 +18,6 @@ const suggestions = [
     "YYZ", "ATL", "ICN",
 ];
 const useAutoSuggest = (initialValue = "") => {
-
     const [input, setInput] = useState(initialValue);
     const [matchingSuggestions, setMatchingSuggestions] = useState([]);
     const [isOpen, setIsOpen] = useState(false);
@@ -50,7 +49,15 @@ const useAutoSuggest = (initialValue = "") => {
 
 const Search = ({startDate,endDate,adults,minors,date,departure,arrival, roundTrip }) => {
     const router = useRouter();
+    const searchParams = useSearchParams();
+    const unauthorized = searchParams.get("unauthorized");
 
+    useEffect(() => {
+        if (unauthorized) {
+            toast.error("You must be signed in to access that page.");
+            router.push('/');
+        }
+    }, [unauthorized]);
     const initialStartDate = startDate
         ? parse(startDate, "dd/MM/yyyy", new Date())
         : null;

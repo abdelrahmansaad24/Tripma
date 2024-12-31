@@ -91,6 +91,14 @@ export async function signup(prev, formData) {
     const hashedPassword = hashUserPassword(password)
     // Create user in the database
     try {
+        const users = email
+            ? await UserManager.findUserByQuery({email: email})
+            : await UserManager.findUserByQuery({phone:phone});
+        console.log(users);
+
+        if (users.user[0]) {
+            return { errors: 'User  already  exists.' };
+        }
         const user = await UserManager.createUser({ email, phone, password: hashedPassword });
         const x = JSON.stringify(user);
         await createAuthSession(user.user.get('_id'));
@@ -136,8 +144,7 @@ export async function signin(prev,formData) {
         const user = email
             ? await UserManager.findUserByQuery({email: email})
             : await UserManager.findUserByQuery({phone:phone});
-
-        if (!user) {
+        if (!user.user[0]) {
             return { success: false, error: 'User not found.' };
         }
         const userData = user.user[0]

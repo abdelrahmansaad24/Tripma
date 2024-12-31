@@ -1,15 +1,11 @@
-
-
-
-
-
-
 import Hero from "@/app/components/hero/hero";
 import Deals from "@/app/components/deals/deals";
 import Link from "next/link";
 import Feedback from "@/app/components/feedback/feedback";
+import {toast} from "react-hot-toast";
 // className={'main'}
-export default function Home() {
+export default function Home({searchParams}) {
+
     return (
         <div>
             <Hero/>

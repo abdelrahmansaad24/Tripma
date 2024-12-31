@@ -29,7 +29,7 @@ const PassengerSchema = new mongoose.Schema({
     },
     secondFlightSeat: {
         type: Number,
-        required: true,
+        required: false,
     },
     emergencyContact: {
         type: mongoose.Schema.Types.ObjectId,
@@ -66,12 +66,16 @@ const Passenger = mongoose.models?.Passenger || mongoose.model('Passenger', Pass
 
 // Passenger management class
 class PassengerManager {
-    static async createPassenger(passengerData) {
+    static async createPassenger(passengerData, session = null) {
         await dbConnect(); // Ensure database connection
 
         try {
             const passenger = new Passenger(passengerData);
-            await passenger.save();
+            if (session) {
+                await passenger.save({ session: session }); // Save the payment with the session
+            } else {
+                await passenger.save(); // Save without session for non-transactional use
+            }
             return { success: true, passenger: passenger };
         } catch (error) {
             console.error(error);

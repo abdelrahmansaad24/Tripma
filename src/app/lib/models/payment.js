@@ -17,6 +17,7 @@ const PaymentSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Flight',
         default: null,
+        required: false,
     },
     seatsBusiness: {
         type: Number,
@@ -61,12 +62,17 @@ const Payment = mongoose.models?.Payment || mongoose.model('Payment', PaymentSch
 
 // Payment management class
 class PaymentManager {
-    static async createPayment(paymentData) {
+    static async createPayment(paymentData, session = null) {
         await dbConnect(); // Ensure database connection
 
         try {
+
             const payment = new Payment(paymentData);
-            await payment.save();
+            if (session) {
+                await payment.save({session:session}); // Save the payment with the session
+            } else {
+                await payment.save(); // Save without session for non-transactional use
+            }
             return { success: true, payment: payment };
         } catch (error) {
             console.error(error);

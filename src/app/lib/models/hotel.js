@@ -2,24 +2,24 @@ import mongoose from 'mongoose';
 import dbConnect from "@/app/lib/dbConnect";
 
 // Define the schema for the Hotel
-const HotelSchema = new mongoose.Schema({
-    image: {
-        type: String,
-        required: true
-    },
-    title: {
-        type: String,
-        required: true
-    },
-    name: {
-        type: String,
-        required: true,
-    },
-    des: {
-        type: String,
-        required: true,
-    }
-}, { timestamps: true, collection: 'hotels'});
+    const HotelSchema = new mongoose.Schema({
+        image: {
+            type: String,
+            required: true
+        },
+        title: {
+            type: String,
+            required: true
+        },
+        name: {
+            type: String,
+            required: true,
+        },
+        des: {
+            type: String,
+            required: true,
+        }
+    }, { timestamps: true, collection: 'hotels'});
 
 // Create the model or reuse the existing one
 const Hotel = mongoose.models?.Hotel || mongoose.model('Hotel', HotelSchema);

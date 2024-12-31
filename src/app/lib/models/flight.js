@@ -93,10 +93,13 @@ class FlightManager {
         }
     }
 
-    static async updateFlight(flightId, updateData) {
+    static async updateFlight(flightId, updateData, session) {
         await dbConnect();
+
         try {
-            const flight = await Flight.findByIdAndUpdate(flightId, updateData, { new: true, runValidators: true });
+            // const options = { new: true, runValidators: true }; // Options for `findByIdAndUpdate`
+            // if (session) options.session = session; // Include session in the options if provided
+            const flight = await Flight.findByIdAndUpdate(flightId, updateData, { session: session, new: true});
             return { success: true, flight: flight };
         } catch (error) {
             return { success: false, error: error.message };

@@ -1,5 +1,4 @@
-// import {useEffect, useState} from "react";
-// import { MdOutlineClose } from "react-icons/md";
+
 import FlightCard from "@/app/components/cards/flightCard";
 import creditCard from "@/assets/creditCard.svg";
 import map1 from "@/assets/Map1.png";
@@ -7,9 +6,10 @@ import styles from "./page.module.css";
 import Image from "next/image"
 import Shop from "@/app/components/shop/shop"
 import Notification from "@/app/(Home)/payment/confirm/[id]/notification";
+import React from "react";
 
 const Page = async ({params}) => {
-    const response = await fetch(`http://localhost:3000/api/user/reservations?id=${params.id}`);
+    const response = await fetch(`http://localhost:3000/api/user/reservations?id=${await params.id}`);
     const data = await response.json();
 
     const {
@@ -97,7 +97,7 @@ const Page = async ({params}) => {
                     <div className={styles.priceDetails}>
                         <div className={styles.priceLabels}>
                             <p className={styles.text}>Departing Flight:</p>
-                            <p className={styles.text}>Arriving Flight:</p>
+                            {flight2 && <p className={styles.text}>Arriving Flight:</p>}
                             <p className={styles.text}>Baggage fees:</p>
                             <p className={styles.text}>Seat upgrade (business):</p>
                             <p className={styles.text}>Subtotal:</p>
@@ -135,9 +135,20 @@ const Page = async ({params}) => {
                     </form>
                 </div>
 
-                <div className={styles.flightRoute}>
+                <div className={styles.flightRoute} >
                     <h2 className={styles.sectionTitle}>Flight Route</h2>
-                    <Image src={map1} alt="Flight Map" className={styles.map}/>
+                    <div style={{position:"relative", display:'flex', flexDirection:'column'}}>
+                        <Image src={map1} alt="Flight Map" className={styles.map}/>
+                        <div style={{position:"absolute",display:"flex", flexDirection:'row', top:'45%',width:'100%'}}>
+                            <p style={{position:"absolute",left: '36%', margin: '0'}}>
+                                {flight1.arrival}
+                            </p>
+                            <p style={{position:"absolute",left: '69%' ,marginTop:'-6px'}}>
+                                {flight1.departure}
+                            </p>
+                        </div>
+
+                    </div>
                 </div>
             </div>
 

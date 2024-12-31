@@ -50,6 +50,7 @@ const Page = () => {
             toast.error("Please fill the card details");
             return
         }
+        const toastId = toast.loading("Processing...");
         // Prepare the data to be sent to the API
         const paymentData = {
             paymentInfo: {
@@ -78,15 +79,16 @@ const Page = () => {
             const result = await response.json();
 
             if (result.success) {
+                toast.success("Action completed successfully!", { id: toastId });
                 // After successful reservation, redirect to the payment confirmation page
                 router.push(`/payment/confirm/${result.payment._id}`);
             } else {
                 // Handle the error if reservation fails
-                toast.error(result.error || "Payment processing failed.");
+                toast.error(result.error || "Payment processing failed.", { id: toastId });
             }
         } catch (error) {
             console.error("Error submitting payment:", error);
-            toast.error("An error occurred while processing the payment.");
+            toast.error("An error occurred while processing the payment.", { id: toastId });
         }
     };
 

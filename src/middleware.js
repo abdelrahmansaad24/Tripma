@@ -1,5 +1,4 @@
 import { NextResponse } from "next/server";
-
 export function middleware(request) {
     const authCookie = request.cookies.get("auth_session");
 
@@ -16,7 +15,9 @@ export function middleware(request) {
 
     // If the user is not signed in, redirect all non-excluded routes to "/"
     if (!authCookie) {
-        return NextResponse.redirect(new URL("/", request.url));
+        const redirectUrl = new URL("/", request.url);
+        redirectUrl.searchParams.set("unauthorized", "true");
+        return NextResponse.redirect(redirectUrl);
     }
 
     return NextResponse.next();

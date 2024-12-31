@@ -4,7 +4,7 @@ import Image from "next/image"
 import Link from "next/link"
 import separator from "@/assets/sperator-noOR.svg"
 import {useRouter} from 'next/navigation';
-// import {cookies} from 'next/headers';
+
 const flightCard = (flight) =>{
     console.log(flight)
     return (
@@ -76,8 +76,8 @@ const FlightPrice = ({ firstFlight, secondFlight, n, adults, minors, passengerNo
 
                 <div className={styles.cartPrice}>
                     {vip !== 0 && <p style={{marginBottom:"10px"}}>{199 * vip}</p>}
-                    <p>${(firstFlight.price + (secondFlight?.price? secondFlight.price : 0) - 121) * passengerNo}</p>
-                    <p>${(121*passengerNo)}</p>
+                    <p>${Math.ceil((firstFlight.price + (secondFlight?.price? secondFlight.price : 0)) * passengerNo *0.904)}</p>
+                    <p>${Math.floor((firstFlight.price + (secondFlight?.price? secondFlight.price : 0)) * passengerNo *0.096)}</p>
                     <p>${(firstFlight.price + (secondFlight?.price? secondFlight.price : 0))* passengerNo + 199 * vip}</p>
                 </div>
             </div>

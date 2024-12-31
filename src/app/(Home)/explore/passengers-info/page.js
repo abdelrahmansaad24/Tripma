@@ -9,6 +9,7 @@ import bags from "@/assets/bag-69f1ddee.png";
 import cookies from "js-cookie";
 import {useRouter} from "next/navigation";
 import { toast } from 'react-hot-toast';
+import emergencyContact from "@/app/lib/models/emergencyContact";
 
 const Page = () => {
     const [firstFlight, setFirstFlight] = useState("");
@@ -122,6 +123,8 @@ const Page = () => {
 
     const validatePassengers = async () => {
         await setErrors(null);
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        const phoneRegex = /^\+?[1-9]\d{1,14}$/; // E.164 format
         const newErrors = await Promise.all(
             passengers.map(async (passenger, index) => {
                 const passengerErrors = {};
@@ -129,18 +132,23 @@ const Page = () => {
                 if (!passenger.lastName) passengerErrors.lastName = "Last name is required";
                 if (!passenger.dob) passengerErrors.dob = "Date of birth is required";
                 if (!passenger.email) passengerErrors.email = "Email is required";
+                if (!emailRegex.test(passenger.email)) passengerErrors.email = 'Invalid email format.';
                 if (!passenger.phone) passengerErrors.phone = "Phone number is required";
+                if (!phoneRegex.test(passenger.phone)) passengerErrors.phone = 'Invalid phone number format. Include country code if applicable.';
                 if (!passenger.knownTravellerNumber) passengerErrors.knownTravellerNumber = "Traveler number is required";
-
+                if (!phoneRegex.test(passenger.knownTravellerNumber)) passengerErrors.knownTravellerNumber = 'Invalid phone number format. Include country code if applicable.';
                 if (!passenger.emergencyContact.firstName)
                     passengerErrors["emergencyContact.firstName"] = "Emergency contact first name is required";
                 if (!passenger.emergencyContact.lastName)
                     passengerErrors["emergencyContact.lastName"] = "Emergency contact last name is required";
                 if (!passenger.emergencyContact.email)
                     passengerErrors["emergencyContact.email"] = "Emergency contact email is required";
+                if (!emailRegex.test(passenger.emergencyContact.email))
+                    passengerErrors["emergencyContact.email"] = "Emergency contact email is not valid";
                 if (!passenger.emergencyContact.phone)
                     passengerErrors["emergencyContact.phone"] = "Emergency contact phone number is required";
-
+                if (!phoneRegex.test(passenger.emergencyContact.phone))
+                    passengerErrors["emergencyContact.phone"] = "Emergency contact phone number is not valid";
                 if (Object.keys(passengerErrors).length > 0) {
                     return { index, passengerErrors };
                 }
@@ -244,6 +252,7 @@ const Page = () => {
                                     type="date"
                                     placeholder="Date of Birth*"
                                     value={passenger.dob}
+                                    max={new Date().toISOString().split('T')[0]} // Set max date to today
                                     onChange={(e) =>
                                         handleInputChange(passenger.id, "dob", e.target.value)
                                     }
@@ -429,7 +438,7 @@ const Page = () => {
                 </div>
                 <div className={styles.price}>
                     {firstFlight && (
-                        <FlightPrice firstFlight={firstFlight} secondFlight={secondFlight}/>
+                        <FlightPrice firstFlight={firstFlight} secondFlight={secondFlight} passengerNo={passengers.length}/>
                     )}
                     <button onClick={handleSubmit} className={isFormValid? styles.confirm: styles.seats}>
                         <p>Select seats</p>
